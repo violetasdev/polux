@@ -2,36 +2,57 @@
 
 require_once ("core/builder/HtmlBase.class.php");
 
+require_once ("core/builder/controleshtml/Input.class.php");
+
+
 class BotonHtml extends HtmlBase{
-    
+
     function campoBoton($atributos) {
     
-        $this->cadenaHTML = "";
-    
+        $this->cadenaHTML = '';
+        
+        $final='';
+        
+        if(!isset ( $atributos [self::ESTILOMARCO] ) || $atributos [self::ESTILOMARCO] == '' || $atributos [self::ESTILOMARCO] == 'jqueryui' ){
+            $atributos [self::ESTILO]='campoBoton';
+        }
+        
         if (! isset ( $atributos [self::SINDIVISION] )) {
     
-            if (isset ( $atributos [self::ESTILO] ) && $atributos [self::ESTILO] != "") {
-                $this->cadenaHTML .= "<div class='" . $atributos [self::ESTILO] . "'>\n";
-            } else {
-                $this->cadenaHTML .= "<div class='campoBoton'>\n";
-            }
+            $this->cadenaHTML .= "<div class='" . $atributos [self::ESTILO] . "'>\n";
+            
+            $final='</div>';
         }
     
         $this->cadenaHTML .= $this->boton ( $this->configuracion, $atributos );
-        if (! isset ( $atributos [self::SINDIVISION] )) {
-            $this->cadenaHTML .= "</div>\n";
-        }
-    
-        return $this->cadenaHTML;
+        
+        return $this->cadenaHTML.$final;
     
     }
     
+    function cuadroAsociado(){
+        
+        $cuadroTexto=new Input();
+        
+        $this->atributos [self::ID] = $this->atributos [self::ID];
+        $this->atributos [self::TIPO] = self::HIDDEN;
+        $this->atributos ["obligatorio"] = false;
+        $this->atributos [self::ETIQUETA] = "";
+        $this->atributos [self::VALOR] = "false";
+        return $cuadroTexto->cuadro_texto($this->atributos );
+        
+    }
+    
     function boton($datosConfiguracion, $misAtributos) {
-    
+        
         $this->setAtributos ( $misAtributos );
-    
+        
+        if($misAtributos [self::ESTILOBOTON]=='jqueryui'){
+            $misAtributos [self::ESTILOBOTON]='ui-button ui-state-default ui-corner-all ui-button-text-only';
+        }
         if ($this->atributos [self::TIPO] == "boton") {
             $this->cadenaBoton = "<button ";
+            $this->cadenaBoton .= "class='".$misAtributos [self::ESTILOBOTON]."' ";
             $this->cadenaBoton .= self::HTMLVALUE . "'" . $this->atributos [self::VALOR] . "' ";
             $this->cadenaBoton .= "id='" . $this->atributos [self::ID] . "A' ";
             $this->cadenaBoton .= self::HTMLTABINDEX . "'" . $this->atributos [self::TABINDEX] . "' ";
@@ -47,12 +68,10 @@ class BotonHtml extends HtmlBase{
                 }
                 $this->cadenaBoton .= "}else{this.disabled=false;false}\">" . $this->atributos [self::VALOR] . '</button>\n';
                 // El cuadro de Texto asociado
-                $this->atributos [self::ID] = $this->atributos [self::ID];
-                $this->atributos [self::TIPO] = self::HIDDEN;
-                $this->atributos ["obligatorio"] = false;
-                $this->atributos [self::ETIQUETA] = "";
-                $this->atributos [self::VALOR] = "false";
-                $this->cadenaBoton .= $this->cuadro_texto ( $datosConfiguracion, $this->atributos );
+                $this->cadenaBoton .= $this->cuadroAsociado();
+                
+                
+                
             } else {
     
                 $this->cadenaBoton .= $this->atributoOnclickBoton ();
@@ -60,12 +79,7 @@ class BotonHtml extends HtmlBase{
                 $this->cadenaBoton .= "\">" . $this->atributos [self::VALOR] . "</button>\n";
     
                 // El cuadro de Texto asociado
-                $this->atributos [self::ID] = $this->atributos [self::ID];
-                $this->atributos [self::TIPO] = self::HIDDEN;
-                $this->atributos ["obligatorio"] = false;
-                $this->atributos [self::ETIQUETA] = "";
-                $this->atributos [self::VALOR] = "false";
-                $this->cadenaBoton .= $this->cuadro_texto ( $datosConfiguracion, $this->atributos );
+                $this->cadenaBoton .= $this->cuadroAsociado();
             }
         } else {
     

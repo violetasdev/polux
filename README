@@ -7,7 +7,8 @@
 
 		    	Framework
 	------------------------------
-UNIVERSIDAD DISTRITAL Francisco José de Caldas 2010 - 2014
+UNIVERSIDAD DISTRITAL Francisco José de Caldas
+Oficina asesora de Sistemas 2012
 
 Descripción
 -----------------
@@ -18,7 +19,7 @@ es un marco de trabajo para el desarrollo de aplicaciones
 orientadas a la web.
 
 Está escrito en lenguaje PHP y propende por una arquitectura
-separada en capas.
+dividida en capas.
 
 Instalación
 -----------------
@@ -38,8 +39,8 @@ Libre.
 
 Aspectos de seguridad
 -----------------------------------
-Se recomienda que el acceso a las carpetas de SARA sea deshabilitado
-desde la configuración del servidor web.
+Se recomienda que el acceso a las carpetas de SARA dea deshabilitado
+dede la configuración del servidor web.
 
 Derechos de Autor
 ------------------

@@ -4,11 +4,9 @@ include_once ("core/manager/Configurador.class.php");
 /**
  * Contiene las definiciones de los diferentes controles HTML
  *
- * @author Paulo Cesar Coronado
- * @version 1.0.0.0, 29/12/2011
- * @package framework:BCK:estandar
- * @copyright Universidad Distrital F.J.C
- * @license GPL Version 3.0 o posterior
+  * Listado de atributos que se requieren para definir el control:
+ * 
+ * $atributos['anchoEtiqueta']:        Entero. Define el ancho de la etqiueta en pixeles. 
  *         
  */
 class HtmlBase {
@@ -39,6 +37,8 @@ class HtmlBase {
     
     const ANCHO = 'ancho';
     
+    const ALTO = 'alto';
+    
     const OTRAOPCIONETIQUETA = 'otraOpcionEtiqueta';
     
     const MULTIPLE = 'multiple';
@@ -63,6 +63,10 @@ class HtmlBase {
     
     const ESTILOCONTENIDO = 'estiloContenido';
     
+    const ESTILOMARCO = 'estiloMarco';
+    
+    const ESTILOBOTON = 'estiloBoton';
+    
     const SINDIVISION = 'sinDivision';
     
     const HIDDEN = 'hidden';
@@ -81,6 +85,8 @@ class HtmlBase {
     
     const ETIQUETA = 'etiqueta';
     
+    const ANCHOETIQUETA = 'anchoEtiqueta';
+    
     const TITULO = 'titulo';
     
     const ESTILOAREA = 'estiloArea';
@@ -92,14 +98,25 @@ class HtmlBase {
     const NOMBREFORMULARIO = 'nombreFormulario';
     
     const INICIO = 'inicio';
+    
     const TIPOFORMULARIO = 'tipoFormulario';
+    
     const METODO = 'metodo';
+    
     const JQUERYUI = 'jqueryui';
+    
     const LEYENDA = 'leyenda';
+    
     const ENLACE = 'enlace';
+    
+    const ENLACECODIFICAR = 'enlaceCodificar';
+    
     const COLUMNAS = 'columnas';
+    
     const TAMANNO = 'tamanno';
+    
     const MENSAJE = 'mensaje';
+    
     const TEXTO = 'texto';
     
     
@@ -117,7 +134,7 @@ class HtmlBase {
     
     const HTMLLABEL = '<label for=';
     
-    const HTMLENDLABEL = '</label>\n';
+    const HTMLENDLABEL = '</label>';
     
     function __construct() {
         
@@ -136,6 +153,48 @@ class HtmlBase {
         $this->configuracion = $configuracion;
     
     }   
+    
+    function etiqueta($misAtributos) {
+    
+        $this->setAtributos ( $misAtributos );
+    
+        $this->mi_etiqueta = "";
+    
+        if (! isset ( $this->atributos [self::SINDIVISION] )) {
+            if (isset ( $this->atributos [self::ANCHOETIQUETA] )) {
+    
+                $this->mi_etiqueta .= "<div style='float:left; width:" . $this->atributos [self::ANCHOETIQUETA] . "px' ";
+            } else {
+                $this->mi_etiqueta .= "<div style='float:left; width:150px' ";
+            }
+    
+            $this->mi_etiqueta .= ">";
+        }
+    
+        $this->mi_etiqueta .= '<label ';
+    
+        if (isset ( $this->atributos ["estiloEtiqueta"] )) {
+            $this->mi_etiqueta .= self::HTMLCLASS . "'" . $this->atributos ["estiloEtiqueta"] . "' ";
+        }
+    
+        $this->mi_etiqueta .= "for='" . $this->atributos [self::ID] . "' >";
+        $this->mi_etiqueta .= $this->atributos [self::ETIQUETA] . self::HTMLENDLABEL;
+    
+        if (isset ( $this->atributos ["etiquetaObligatorio"] ) && $this->atributos ["etiquetaObligatorio"]) {
+            $this->mi_etiqueta .= "<span class='texto_rojo texto_pie'>* </span>";
+        } else {
+            if (! isset ( $this->atributos [self::SINDIVISION] ) && (isset ( $this->atributos [self::ESTILO] ) && $this->atributos [self::ESTILO] != "jqueryui")) {
+                $this->mi_etiqueta .= "<span style='white-space:pre;'> </span>";
+            }
+        }
+    
+        if (! isset ( $this->atributos [self::SINDIVISION] )) {
+            $this->mi_etiqueta .= "</div>\n";
+        }
+    
+        return $this->mi_etiqueta;
+    
+    }
     
 
 }

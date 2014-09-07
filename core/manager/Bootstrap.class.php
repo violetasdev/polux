@@ -7,11 +7,12 @@
  * @author      Paulo Cesar Coronado - Karen Palacios
  *
  */
-require_once ("core/manager/Configurador.class.php");
-require_once ("core/auth/Sesion.class.php");
-require_once ("core/connection/FabricaDbConexion.class.php");
-require_once ("core/crypto/Encriptador.class.php");
-require_once ("core/builder/Mensaje.class.php");
+require_once ('core/manager/Configurador.class.php');
+require_once ('core/auth/Sesion.class.php');
+require_once ('core/connection/FabricaDbConexion.class.php');
+require_once ('core/crypto/Encriptador.class.php');
+require_once ('core/builder/Mensaje.class.php');
+require_once ('core/builder/InspectorHTML.class.php');
 
 class Bootstrap {
     
@@ -73,6 +74,9 @@ class Bootstrap {
     var $cuadroMensaje;
     
     
+    var $miInspectorHtml;
+    
+    
     const PAGINA='pagina';
     
     const ERROR='error';
@@ -105,6 +109,8 @@ class Bootstrap {
          * El objeto del a clase Sesion es el último que se debe crear.
          */
         $this->sesionUsuario = Sesion::singleton ();
+        
+        $this->miInspectorHtml=InspectorHTML::singleton();
     
     }
     
@@ -115,6 +121,7 @@ class Bootstrap {
         
         // Poblar el atributo miConfigurador->configuracion
         $this->miConfigurador->variable ();
+        $this->miConfigurador->variablesCodificadas();
         
         if (! $this->miConfigurador->getVariableConfiguracion ( "instalado" )) {
             $this->instalarAplicativo ();
@@ -173,6 +180,18 @@ class Bootstrap {
             /**
              * Procesa la página solicitada por el usuario
              */
+            
+            /**
+             * Evitar que se ingrese codigo HTML y PHP en los campos de texto
+             * Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
+             */
+            
+            $excluir = '';
+            $_REQUEST = $this->miInspectorHtml->limpiarPHPHTML ( $_REQUEST );           
+            //Evitar que se ingrese código malicioso SQL
+            
+            $_REQUEST=$this->miInspectorHtml->limpiarSQL($_REQUEST);
+            
             require_once ($this->miConfigurador->getVariableConfiguracion ( "raizDocumento" ) . "/core/builder/Pagina.class.php");
             $this->miPagina = new Pagina ();
             
@@ -222,6 +241,8 @@ class Bootstrap {
          */
         $respuesta = '';
         
+        
+        
         if (isset ( $_REQUEST [$this->miConfigurador->getVariableConfiguracion ( self::ENLACE )] )) {
             $this->miConfigurador->fabricaConexiones->crypto->decodificar_url ( $_REQUEST [$this->miConfigurador->getVariableConfiguracion ( self::ENLACE )] );
             unset ( $_REQUEST [$this->miConfigurador->getVariableConfiguracion ( self::ENLACE )] );
@@ -230,12 +251,20 @@ class Bootstrap {
                 $this->redireccionar ();
                 $respuesta = false;
             }
-            if (isset ( $_REQUEST [self::PAGINA] )) {
-                $respuesta = $_REQUEST [self::PAGINA];
-            }
-        } else {
             
-            $respuesta = 'index';
+        } 
+        
+        if (isset ( $_REQUEST [self::PAGINA] )) {
+            $respuesta = $_REQUEST [self::PAGINA];
+        }else {
+            
+            if (isset ( $_REQUEST ['development'] )) {
+            
+                $respuesta = 'development';
+                
+            }else{
+                $respuesta = 'index';
+            }
         }
         
         return $respuesta;

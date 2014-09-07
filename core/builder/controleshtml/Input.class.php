@@ -1,12 +1,36 @@
 <?php
+
+/**
+ * $atributo['estilo'] 
+ * $atributo['marco']
+ * $atributo['columnas']
+ * $atributo['etiqueta']
+ * $atributo['anchoEtiqueta']
+ * $atributo['estiloEtiqueta']
+ * $atributo['dobleLinea']: La etiqueta va en una línea diferente a la del control asociado.
+ * $atributo['tipo']
+ * $atributo['maximoTamanno']
+ * $atributo['data-validate'] : Específico si se trabaja con el plugin Ketchup
+ * $atributo['validar'] : Específico si se trabajo con el plugin validation-engine
+ * $atributo['evento']
+ * $atributo['tabIndex']
+ * $atributo['name']
+ * $atributo['id']
+ * $atributo['valor']
+ * $atributo['titulo']
+ * $atributo['deshabilitado']
+ * $atributo['tamanno']
+ * 
+ */
+
 require_once ("core/builder/HtmlBase.class.php");
 
 class Input  extends HtmlBase {
     
     
     function campoCuadroTexto($atributos) {
-    
-        $this->cadenaHTML = "";
+       
+        $this->cadenaHTML = '';
     
         $final = '';
     
@@ -14,7 +38,7 @@ class Input  extends HtmlBase {
             $atributos [self::ESTILO] = 'campoCuadroTexto';
         }
     
-        if (! isset ( $atributos [self::SINDIVISION] )) {
+        if (isset ( $atributos ['marco'] ) && $atributos ['marco']) {
     
             $this->cadenaHTML .= "<div class='" . $atributos [self::ESTILO] . " ";
     
@@ -25,16 +49,16 @@ class Input  extends HtmlBase {
     
             $this->cadenaHTML .= "'>\n";
     
-            $final = '</div>\n';
+            $final = '</div>';
         }
     
         if (isset ( $atributos [self::ETIQUETA] ) && $atributos [self::ETIQUETA] != "") {
-            $this->cadenaHTML .= $this->etiqueta ( $atributos );
+            $this->cadenaHTML .= self::etiqueta($atributos );
         }
-        if (isset ( $atributos ["dobleLinea"] )) {
+        if (isset ( $atributos ["dobleLinea"] ) && $atributos ["dobleLinea"]) {
             $this->cadenaHTML .= "<br>";
         }
-        $this->cadenaHTML .= $this->cuadro_texto ( $this->configuracion, $atributos );
+        $this->cadenaHTML .= $this->cuadro_texto ( $atributos );
     
         $this->cadenaHTML .= $final;
     
@@ -45,6 +69,8 @@ class Input  extends HtmlBase {
     function cuadro_texto($misAtributos) {
     
         $this->setAtributos ( $misAtributos );
+        
+        $cadena='';
     
         if (! isset ( $this->atributos [self::TIPO] ) || $this->atributos [self::TIPO] != self::HIDDEN) {
     
@@ -79,13 +105,13 @@ class Input  extends HtmlBase {
             if (isset ( $this->atributos [self::VALOR] )) {
                 $this->mi_cuadro .= self::HTMLVALUE . "'" . $this->atributos [self::VALOR] . "' ";
             }
-            $this->mi_cuadro .= ">\n";
+            $this->mi_cuadro .= ">";
         }
         return $this->mi_cuadro;
     
     }
     
-    function atributosGeneralesCuadroTexto() {
+    private function atributosGeneralesCuadroTexto() {
     
         $cadena = '';
     
@@ -102,21 +128,28 @@ class Input  extends HtmlBase {
         if (isset ( $this->atributos [self::DESHABILITADO] ) && $this->atributos [self::DESHABILITADO]) {
             $cadena .= "readonly='readonly' ";
         }
-    
-        if (isset ( $this->atributos ["name"] ) && $this->atributos ["name"] != "") {
-            $cadena .= self::HTMLNAME . "'" . $this->atributos ["name"] . "' ";
-        } else {
-            $cadena .= self::HTMLNAME . "'" . $this->atributos [self::ID] . "' ";
+        
+        if(isset($atributos['campoSeguro']) && $atributos['campoSeguro']){
+        
+            $this->atributos [self::ID]=sha1($this->atributos [self::ID].$_REQUEST['tiempo']);
+            $this->atributos [self::NOMBRE]=$this->atributos [self::ID];
+        
         }
     
         $cadena .= "id='" . $this->atributos [self::ID] . "' ";
+        
+        if ($this->atributos [self::NOMBRE] != "") {
+            $cadena .= self::HTMLNAME . "'" . $this->atributos [self::NOMBRE] . "' ";
+        } else {
+            $cadena .= self::HTMLNAME . "'" . $this->atributos [self::ID] . "' ";
+        }
     
         if (isset ( $this->atributos [self::VALOR] )) {
             $cadena .= self::HTMLVALUE . "'" . $this->atributos [self::VALOR] . "' ";
         }
     
-        if (isset ( $this->atributos ["tamanno"] )) {
-            $cadena .= "size='" . $this->atributos ["tamanno"] . "' ";
+        if (isset ( $this->atributos [self::TAMANNO] )) {
+            $cadena .= "size='" . $this->atributos [self::TAMANNO] . "' ";
         } else {
             $cadena .= "size='50' ";
         }
@@ -125,7 +158,7 @@ class Input  extends HtmlBase {
     
     }
     
-    function atributoClassCuadroTexto() {
+    private function atributoClassCuadroTexto() {
     
         $cadena = self::HTMLCLASS . "'";
         // --------------Atributo class --------------------------------

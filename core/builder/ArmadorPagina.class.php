@@ -18,15 +18,17 @@ class ArmadorPagina {
     
     var $seccionesDeclaradas;
     
-    const SECCION='seccion';
+    const SECCION = 'seccion';
     
-    const GRUPO='grupo';
+    const GRUPO = 'grupo';
     
-    const NOMBRE='nombre';
+    const BLOQUEGRUPO = 'bloqueGrupo';
     
-    const ARCHIVOBLOQUE='/bloque.php';
+    const NOMBRE = 'nombre';
     
-    const CARPETABLOQUES='/blocks/';
+    const ARCHIVOBLOQUE = '/bloque.php';
+    
+    const CARPETABLOQUES = '/blocks/';
     
     function __construct() {
         
@@ -219,13 +221,36 @@ class ArmadorPagina {
             $unBloque [$clave] = trim ( $valor );
         }
         
-        if ($unBloque [self::GRUPO] == "") {
-            $archivo = $this->raizDocumentos . self::CARPETABLOQUES . $unBloque [self::NOMBRE] . self::ARCHIVOBLOQUE;
-        } else {
-            $archivo = $this->raizDocumentos . self::CARPETABLOQUES . $unBloque [self::GRUPO] . "/" . $unBloque [self::NOMBRE] . self::ARCHIVOBLOQUE;
+        if (! isset ( $_REQUEST ['actionBloque'] ) ||(isset ( $_REQUEST ['actionBloque'] ) && $unBloque [self::NOMBRE]!=$_REQUEST ['actionBloque'] ) ) {
+            if ($unBloque [self::GRUPO] == '') {
+                $archivo = $this->raizDocumentos . self::CARPETABLOQUES . $unBloque [self::NOMBRE] . self::ARCHIVOBLOQUE;
+            } else {
+                $archivo = $this->raizDocumentos . self::CARPETABLOQUES . $unBloque [self::GRUPO] . "/" . $unBloque [self::NOMBRE] . self::ARCHIVOBLOQUE;
+            }
+            include ($archivo);
+            
+            return true;
+        }else{
+            
+            $carpeta='';
+            if (isset ( $_REQUEST [self::BLOQUEGRUPO] ) && $_REQUEST [self::BLOQUEGRUPO] != "") {
+                $carpeta=$_REQUEST [self::BLOQUEGRUPO].'/';
+                $unBloque ['grupo']=$carpeta;
+            }
+            if (isset ( $_REQUEST ["bloque"] )) {
+                $unBloque [self::NOMBRE] = $_REQUEST ['actionBloque'];
+                $_REQUEST ['action']=$_REQUEST ['actionBloque'];
+                $unBloque ["id_bloque"] = $_REQUEST ["bloque"];
+                include_once ($this->raizDocumentos . self::CARPETABLOQUES . $carpeta. $unBloque [self::NOMBRE] . self::ARCHIVOBLOQUE);
+                unset($_REQUEST ['action']);                
+            } elseif (isset ( $_REQUEST ["procesarAjax"] )) {
+            
+                include_once ($this->raizDocumentos . self::CARPETABLOQUES . $carpeta. $_REQUEST ["bloqueNombre"] . self::ARCHIVOBLOQUE);
+            
+            }
+            
         }
         
-        include ($archivo);
     
     }
     
@@ -269,10 +294,12 @@ class ArmadorPagina {
     function incluirFuncionReady($unBloque) {
         
         /**
-         * Esta función registra funciones javascript para la página.
-         * Tales funciones están declartadas en cada bloque
-         * y pueden venir directamente en un archivo ready.js o procesadas a partir de un archivo ready.php. Depende
-         * del programador decidir cual de las dos opciones (o las dos) implementar.
+         * Esta función registra funciones las opciones de la función ready (jquery) para la página
+         * Tales funciones están declaradas en cada bloque y pueden venir directamente en un archivo
+         * llamado ready.js o en un archivo ready.php.
+         *
+         *
+         * El archivo ready.php se utiliza cuando se tenga que crear de manera dinámica el js.
          */
         echo "<script type='text/javascript'>\n";
         echo "$(document).ready(function(){\n";

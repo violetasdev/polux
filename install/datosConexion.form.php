@@ -283,7 +283,21 @@ echo $formulario;
         echo "data";
     }
     ?>" />
-
+        <label>Estilo predeterminado <span class="textoPequenno">Estilo jquery-ui predeterminado</span></label> <input type="text"
+    				name="estiloPredeterminado" id="estiloPredeterminado"
+    				value="<?php
+        if (isset ( $_REQUEST ['estiloPredeterminado'] )) {
+            echo $_REQUEST ['estiloPredeterminado'];
+        } else {
+            echo 'cupertino';
+        }
+        ?>" />
+            <div class="spacer"></div>
+			<div class="spacer"></div>
+			<h1>Módulo de desarrollo</h1>
+			<p>Definir si el aplicativo incluirá módulos de desarrollo.</p>
+			<label>Instalar módulo de desarrollo</label><input type="checkbox"
+				name="moduloDesarrollo" value="moduloDesarrollo" checked="checked"/>
 			<div class="spacer"></div>
 			<div class="spacer"></div>
 			<h1>Servicios Web</h1>
