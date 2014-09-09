@@ -1,6 +1,6 @@
 <?php
-namespace <directorio\nombreBloque>;
 
+// Evitar un acceso directo a este archivo
 if (! isset ( $GLOBALS ["autorizado"] )) {
     include ("../index.php");
     exit ();
@@ -30,13 +30,16 @@ include_once ("Lenguaje.class.php");
 // Para evitar redefiniciones de clases el nombre de la clase del archivo bloque debe corresponder al nombre del bloque
 // precedida por la palabra Bloque
 
-class Bloque implements \Bloque {
-    var $nombreBloque;
-    var $miFuncion;
-    var $miSql;
-    var $miConfigurador;
-    public 
+if (class_exists ( 'Bloque<nombreBloque>' ) === false) {
+	class Bloque<nombreBloque> implements Bloque {
+		var $nombreBloque;
+		var $miFuncion;
+		var $miSql;
+		var $miConfigurador;
+		public 
 
+	
+    
     function __construct($esteBloque, $lenguaje = "") {
         
         // El objeto de la clase Configurador debe ser único en toda la aplicación
@@ -56,13 +59,24 @@ class Bloque implements \Bloque {
         $this->miConfigurador->setVariableConfiguracion ( "rutaBloque", $ruta );
         $this->miConfigurador->setVariableConfiguracion ( "rutaUrlBloque", $rutaURL );
         
-        $this->miFuncion = new Funcion ();
-        $this->miSql = new Sql ();
-        $this->miFrontera = new Frontera ();
-        $this->miLenguaje = new Lenguaje ();
+        $nombreClaseFuncion = "Funcion" . $esteBloque ["nombre"];
+        $this->miFuncion = new $nombreClaseFuncion ();
+        
+        $nombreClaseSQL = "Sql" . $esteBloque ["nombre"];
+        $this->miSql = new $nombreClaseSQL ();
+        
+        $nombreClaseFrontera = "Frontera" . $esteBloque ["nombre"];
+        $this->miFrontera = new $nombreClaseFrontera ();
+        
+        $nombreClaseLenguaje = "Lenguaje" . $esteBloque ["nombre"];
+        $this->miLenguaje = new $nombreClaseLenguaje ();
     
     }
-    public function bloque() {
+		public 
+
+	
+    
+    function bloque() {
         
         if (isset ( $_REQUEST ['botonCancelar'] ) && $_REQUEST ['botonCancelar'] == "true") {
             $this->miFuncion->redireccionar ( "paginaPrincipal" );
@@ -85,22 +99,18 @@ class Bloque implements \Bloque {
     
     }
 }
+}
 // @ Crear un objeto bloque especifico
 // El arreglo $unBloque está definido en el objeto de la clase ArmadorPagina o en la clase ProcesadorPagina
 
-if (isset ( $_REQUEST ["procesarAjax"] )) {
-    $unBloque ["nombre"] = $_REQUEST ["bloqueNombre"];
-    $unBloque ["grupo"] = $_REQUEST ["bloqueGrupo"];
-} else {
-    $this->miConfigurador->setVariableConfiguracion ( "esteBloque", $unBloque );
-}
+$estaClase = "Bloque" . $unBloque ["nombre"];
 
 $this->miConfigurador->setVariableConfiguracion ( "esteBloque", $unBloque );
 
 if (isset ( $lenguaje )) {
-    $esteBloque = new Bloque ( $unBloque, $lenguaje );
+	$esteBloque = new $estaClase ( $unBloque, $lenguaje );
 } else {
-    $esteBloque = new Bloque ( $unBloque );
+	$esteBloque = new $estaClase ( $unBloque );
 }
 
 $esteBloque->bloque ();

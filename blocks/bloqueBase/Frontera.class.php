@@ -1,17 +1,7 @@
 <?
-
-namespace <directorio\nombreBloque>;
-
-if (! isset ( $GLOBALS ["autorizado"] )) {
-    include ("../index.php");
-    exit ();
-}
-
-
-
 include_once ("core/manager/Configurador.class.php");
 
-class Frontera{
+class Frontera<nombreBloque>{
 
 	var $ruta;
 	var $sql;
@@ -26,7 +16,7 @@ $miConfigurador;
 
 function __construct() {
     
-    $this->miConfigurador = \Configurador::singleton ();
+    $this->miConfigurador = Configurador::singleton ();
 
 }
 
@@ -67,7 +57,7 @@ function __construct() {
 		$this->ruta=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
 		
 		
-		$this->miFormulario=new \FormularioHtml();
+		$this->miFormulario=new formularioHtml();
 		
 		if(isset($_REQUEST['opcion'])){
 
