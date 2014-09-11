@@ -29,33 +29,11 @@ class Funcion {
     var $miRecursoDB;
     var $crypto;
     
-    function verificarCampos() {
-        
-        include_once ($this->ruta . "/funcion/verificarCampos.php");
-        if ($this->error == true) {
-            return false;
-        } else {
-            return true;
-        }
     
-    }
     
-    function redireccionar($opcion, $valor = "") {
-        
-        include_once ($this->ruta . "/funcion/redireccionar.php");
+    function procesarFormulario() {
     
-    }
-    
-    function registrarPagina() {
-        
-        include_once ($this->ruta . "funcion/RegistradorPagina.class.php");
-        
-        return $resultado;
-    }
-    
-    function registrarBloque() {
-    
-        include_once ($this->ruta . "funcion/RegistradorBloque.class.php");
+        include_once ($this->ruta . "funcion/formProcessor.php");
     
         return $resultado;
     }
@@ -77,24 +55,9 @@ class Funcion {
         
         if (isset ( $_REQUEST ['procesarAjax'] )) {
             $this->procesarAjax ();
-        } elseif (isset ( $_REQUEST ['opcion'] )) {
+        } else{
             
-            switch ($_REQUEST ['opcion']) {
-                
-                case 'registrarPagina' :
-                    
-                    $resultado = $this->registrarPagina ();
-                    break;
-                
-                case 'registrarBloque' :
-                    $resultado = $this->registrarBloque ();
-                    break;
-                
-                case 'armarPagina' :
-                    $resultado = $this->armarPagina ();
-                    break;
-            }
-        
+            $resultado = $this->procesarFormulario ();
         }
         
         return $resultado;

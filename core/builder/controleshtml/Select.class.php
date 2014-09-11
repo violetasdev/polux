@@ -79,15 +79,16 @@ class Select extends HtmlBase {
      */
      
      
-     function cuadro_lista($misAtributos) {
+     function cuadro_lista($atributos) {
         
-        $this->setAtributos ( $misAtributos );
+         $this->setAtributos ( $atributos );        
+        $this->campoSeguro();
         
         // Invocar la funcion que rescata el registro de los valores que se mostraran en la lista
         
-        if (isset ( $misAtributos ['matrizItems'] )) {
-            $this->cuadro_registro = $misAtributos ['matrizItems'];
-            $this->cuadroCampos = count ( $misAtributos ['matrizItems'] );
+        if (isset ( $this->atributos ['matrizItems'] )) {
+            $this->cuadro_registro = $this->atributos ['matrizItems'];
+            $this->cuadroCampos = count ( $this->atributos ['matrizItems'] );
             $resultado = true;
         
         } else {
@@ -125,8 +126,9 @@ class Select extends HtmlBase {
             $this->cadena_html .= "disabled ";
         }
         
-        if ($this->atributos ["id"] != "") {
-            $this->cadena_html .= "id='" . $this->atributos ["id"] . "' ";
+        
+        if ($this->atributos [self::ID] != '') {
+            $this->cadena_html .= "id='" . $this->atributos [self::ID] . "' ";
         }
         
         $this->atributoClassSelect ();

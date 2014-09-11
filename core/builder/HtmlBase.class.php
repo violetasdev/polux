@@ -195,7 +195,15 @@ class HtmlBase {
         return $this->mi_etiqueta;
     
     }
-    
+
+    function campoSeguro(){
+        
+        if(isset($this->atributos['campoSeguro']) && $this->atributos['campoSeguro'] && $this->atributos [self::ID]!='formSaraData'){
+            $this->atributos [self::ID]=$this->miConfigurador->fabricaConexiones->crypto->codificar($this->atributos [self::ID].$_REQUEST['tiempo']);
+            $this->atributos [self::NOMBRE]=$this->atributos [self::ID];
+        
+        }
+    }
 
 }
 ?>

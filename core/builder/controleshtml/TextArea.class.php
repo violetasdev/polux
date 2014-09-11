@@ -13,6 +13,9 @@ class TextArea  extends HtmlBase{
     
     
     function campoTextArea($atributos) {
+        
+        $this->setAtributos ( $atributos );
+        $this->campoSeguro();
     
         if ($atributos [self::ESTILO] == self::JQUERYUI) {
             $this->cadenaHTML = "<div>\n";
@@ -80,13 +83,13 @@ class TextArea  extends HtmlBase{
     function atributosGeneralesAreaTexto() {
     
         $cadena = '';
-    
+        
         if (isset ( $this->atributos [self::DESHABILITADO] ) && $this->atributos [self::DESHABILITADO]) {
             $cadena .= "readonly='1' ";
         }
     
-        if (isset ( $this->atributos ["name"] ) && $this->atributos ["name"] != "") {
-            $cadena .= self::HTMLNAME . "'" . $this->atributos ["name"] . "' ";
+        if (isset ( $this->atributos [self::NOMBRE] ) && $this->atributos [self::NOMBRE] != "") {
+            $cadena .= self::HTMLNAME . "'" . $this->atributos [self::NOMBRE] . "' ";
         } else {
             $cadena .= self::HTMLNAME . "'" . $this->atributos [self::ID] . "' ";
         }

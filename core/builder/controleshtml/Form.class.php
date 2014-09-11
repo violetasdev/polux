@@ -21,16 +21,16 @@ class Form  extends HtmlBase {
     
     var $cadenaHTML;
     
-    function formularioConMarco($atributos='') {
+    function formularioConMarco() {
     
-        if ($atributos['tipoEtiqueta'] == self::INICIO) {
+        if ($this->atributos['tipoEtiqueta'] == self::INICIO) {
     
-            if (isset ( $atributos [self::ESTILO] ) && $atributos [self::ESTILO] != "") {
-                $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . "'>\n";
+            if (isset ( $this->atributos [self::ESTILO] ) && $this->atributos [self::ESTILO] != "") {
+                $this->cadenaHTML = "<div class='" . $this->atributos [self::ESTILO] . "'>\n";
             } else {
                 $this->cadenaHTML = "<!-- Inicio marco del Formulario --><div class='formulario'>\n";
             }
-            $this->cadenaHTML.=$this->procesarAtributosFormulario($atributos);
+            $this->cadenaHTML.=$this->procesarAtributosFormulario($this->atributos);
     
         } else {
             $this->cadenaHTML = "</form><!-- Fin del Formulario -->";
@@ -49,11 +49,11 @@ class Form  extends HtmlBase {
      * @return Ambigous <string, unknown>
      *
      */
-    function formularioSinMarco($atributos = '') {
+    function formularioSinMarco() {
     
-        if ($atributos['tipoEtiqueta']  == self::INICIO) {
+        if ($this->atributos['tipoEtiqueta']  == self::INICIO) {
     
-            $this->cadenaHTML=$this->procesarAtributosFormulario($atributos);
+            $this->cadenaHTML=$this->procesarAtributosFormulario();
     
         } else {
             $this->cadenaHTML = "</form>\n";
@@ -66,6 +66,10 @@ class Form  extends HtmlBase {
     
     function formulario($atributos){
         
+        $this->setAtributos ( $atributos );
+        
+        $this->campoSeguro();
+        
         if(!isset($atributos['tipoEtiqueta'])){
             $atributos['tipoEtiqueta']='fin';
             
@@ -73,48 +77,48 @@ class Form  extends HtmlBase {
         
         if (isset($atributos['marco']) && $atributos['marco']) {
         
-            $this->cadenaHTML=$this->formularioConMarco($atributos);
+            $this->cadenaHTML=$this->formularioConMarco();
         
         } else {
-            $this->cadenaHTML=$this->formularioSinMarco($atributos);
+            $this->cadenaHTML=$this->formularioSinMarco();
         }
         
         return $this->cadenaHTML;
     }
     
     
-    private function procesarAtributosFormulario($atributos){
+    private function procesarAtributosFormulario(){
     
         $cadena= "<!-- Inicio del Formulario -->\n<form ";
         $nombre='';
     
-        if (isset ( $atributos ['id'] )) {
-            $cadena .= "id='" . $atributos ['id'] . "' ";
-            $nombre=$atributos ['id'];
+        if (isset ( $this->atributos ['id'] )) {
+            $cadena .= "id='" . $this->atributos ['id'] . "' ";
+            $nombre=$this->atributos ['id'];
         }
     
-        if (isset ( $atributos [self::TIPOFORMULARIO] ) && $atributos [self::TIPOFORMULARIO]!='') {
-            $cadena .= "enctype='" . $atributos [self::TIPOFORMULARIO] . "' ";
+        if (isset ( $this->atributos [self::TIPOFORMULARIO] ) && $this->atributos [self::TIPOFORMULARIO]!='') {
+            $cadena .= "enctype='" . $this->atributos [self::TIPOFORMULARIO] . "' ";
         }
     
-        if (isset ( $atributos [self::METODO] )) {
-            $cadena.= "method='" . strtolower ( $atributos [self::METODO] ) . "' ";
+        if (isset ( $this->atributos [self::METODO] )) {
+            $cadena.= "method='" . strtolower ( $this->atributos [self::METODO] ) . "' ";
         }
     
-        if (isset ( $atributos ["action"] )) {
-            $cadena .= "action='".$atributos ["action"]."' ";
+        if (isset ( $this->atributos ["action"] )) {
+            $cadena .= "action='".$this->atributos ["action"]."' ";
         }else{
             $cadena.= "action='index.php' ";
         }
     
-        if (isset ( $atributos [self::TITULO] )) {
-            $cadena .= "title='" . $atributos [self::TITULO] . "' ";
+        if (isset ( $this->atributos [self::TITULO] )) {
+            $cadena .= "title='" . $this->atributos [self::TITULO] . "' ";
         }else{
             $cadena.= "title='Formulario' ";
         }
     
-        if (isset ( $atributos ['nombre'] )) {
-            $cadena.= "name='" . $atributos ["nombre"] . "'>\n";
+        if (isset ( $this->atributos ['nombre'] )) {
+            $cadena.= "name='" . $this->atributos ["nombre"] . "'>\n";
         }else{
             $cadena.= "name='" . $nombre. "'>\n";
         }

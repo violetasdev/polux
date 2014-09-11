@@ -29,22 +29,25 @@ class Input  extends HtmlBase {
     
     
     function campoCuadroTexto($atributos) {
+        
+        $this->setAtributos ( $atributos );        
+        $this->campoSeguro();
        
         $this->cadenaHTML = '';
     
         $final = '';
     
-        if (! isset ( $atributos [self::ESTILO] )) {
-            $atributos [self::ESTILO] = 'campoCuadroTexto';
+        if (! isset ( $this->atributos [self::ESTILO] )) {
+            $this->atributos [self::ESTILO] = 'campoCuadroTexto';
         }
     
-        if (isset ( $atributos ['marco'] ) && $atributos ['marco']) {
+        if (isset ( $this->atributos ['marco'] ) && $this->atributos ['marco']) {
     
-            $this->cadenaHTML .= "<div class='" . $atributos [self::ESTILO] . " ";
+            $this->cadenaHTML .= "<div class='" . $this->atributos [self::ESTILO] . " ";
     
-            if (isset ( $atributos [self::COLUMNAS] ) && $atributos [self::COLUMNAS] != "" && is_numeric ( $atributos [self::COLUMNAS] )) {
+            if (isset ( $this->atributos [self::COLUMNAS] ) && $this->atributos [self::COLUMNAS] != "" && is_numeric ( $this->atributos [self::COLUMNAS] )) {
     
-                $this->cadenaHTML .= " anchoColumna" . $atributos [self::COLUMNAS];
+                $this->cadenaHTML .= " anchoColumna" . $this->atributos [self::COLUMNAS];
             }
     
             $this->cadenaHTML .= "'>\n";
@@ -52,13 +55,13 @@ class Input  extends HtmlBase {
             $final = '</div>';
         }
     
-        if (isset ( $atributos [self::ETIQUETA] ) && $atributos [self::ETIQUETA] != "") {
-            $this->cadenaHTML .= self::etiqueta($atributos );
+        if (isset ( $this->atributos [self::ETIQUETA] ) && $this->atributos [self::ETIQUETA] != "") {
+            $this->cadenaHTML .= self::etiqueta($this->atributos );
         }
-        if (isset ( $atributos ["dobleLinea"] ) && $atributos ["dobleLinea"]) {
+        if (isset ( $this->atributos ["dobleLinea"] ) && $this->atributos ["dobleLinea"]) {
             $this->cadenaHTML .= "<br>";
         }
-        $this->cadenaHTML .= $this->cuadro_texto ( $atributos );
+        $this->cadenaHTML .= $this->cuadro_texto ( $this->atributos );
     
         $this->cadenaHTML .= $final;
     
@@ -66,9 +69,11 @@ class Input  extends HtmlBase {
     
     }
     
-    function cuadro_texto($misAtributos) {
+    function cuadro_texto($atributos='') {
     
-        $this->setAtributos ( $misAtributos );
+        if($atributos!=''){
+            $this->setAtributos ( $atributos );
+        }
         
         $cadena='';
     
@@ -129,13 +134,7 @@ class Input  extends HtmlBase {
             $cadena .= "readonly='readonly' ";
         }
         
-        if(isset($atributos['campoSeguro']) && $atributos['campoSeguro']){
         
-            $this->atributos [self::ID]=sha1($this->atributos [self::ID].$_REQUEST['tiempo']);
-            $this->atributos [self::NOMBRE]=$this->atributos [self::ID];
-        
-        }
-    
         $cadena .= "id='" . $this->atributos [self::ID] . "' ";
         
         if ($this->atributos [self::NOMBRE] != "") {
@@ -153,8 +152,9 @@ class Input  extends HtmlBase {
         } else {
             $cadena .= "size='50' ";
         }
-    
+        
         return $cadena;
+       
     
     }
     
@@ -189,20 +189,22 @@ class Input  extends HtmlBase {
     }
     
     
-    function campoFecha($atributos) {
+    function campoFecha($atributos='') {
+        
+        $this->setAtributos ( $atributos );
     
-        if (isset ( $atributos [self::ESTILO] ) && $atributos [self::ESTILO] != "") {
-            $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . "'>\n";
+        if (isset ( $this->atributos [self::ESTILO] ) && $this->atributos [self::ESTILO] != "") {
+            $this->cadenaHTML = "<div class='" . $this->atributos [self::ESTILO] . "'>\n";
         } else {
             $this->cadenaHTML = "<div class='campoFecha'>\n";
         }
-        $this->cadenaHTML .= $this->etiqueta ( $atributos );
+        $this->cadenaHTML .= $this->etiqueta ( $this->atributos );
         $this->cadenaHTML .= "<div style='display:table-cell;vertical-align:top;float:left;'><span style='white-space:pre;'> </span>";
-        $this->cadenaHTML .= $this->cuadro_texto ( $this->configuracion, $atributos );
+        $this->cadenaHTML .= $this->cuadro_texto ( $this->configuracion, $this->atributos );
         $this->cadenaHTML .= "</div>";
         $this->cadenaHTML .= "<div style='display:table-cell;vertical-align:top;float:left;'>";
         $this->cadenaHTML .= "<span style='white-space:pre;'> </span><img src=\"" . $this->configuracion ["host"] . $this->configuracion ["site"] . $this->configuracion ["grafico"] . "/calendarito.jpg\" ";
-        $this->cadenaHTML .= "id=\"imagen" . $atributos ["id"] . "\" style=\"cursor: pointer; border: 0px solid red;\" ";
+        $this->cadenaHTML .= "id=\"imagen" . $this->atributos ["id"] . "\" style=\"cursor: pointer; border: 0px solid red;\" ";
         $this->cadenaHTML .= "title=\"Selector de Fecha\" alt=\"Selector de Fecha\" onmouseover=\"this.style.background='red';\" onmouseout=\"this.style.background=''\" />";
         $this->cadenaHTML .= "</div>";
         $this->cadenaHTML .= "</div>\n";

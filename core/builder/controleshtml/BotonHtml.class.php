@@ -8,7 +8,11 @@ require_once ("core/builder/controleshtml/Input.class.php");
 class BotonHtml extends HtmlBase{
 
     function campoBoton($atributos) {
-    
+        
+        $this->setAtributos ( $atributos );
+        
+        $this->campoSeguro();
+
         $this->cadenaHTML = '';
         
         $final='';
@@ -24,7 +28,7 @@ class BotonHtml extends HtmlBase{
             $final='</div>';
         }
     
-        $this->cadenaHTML .= $this->boton ( $this->configuracion, $atributos );
+        $this->cadenaHTML .= $this->boton ( $this->configuracion);
         
         return $this->cadenaHTML.$final;
     
@@ -33,8 +37,6 @@ class BotonHtml extends HtmlBase{
     function cuadroAsociado(){
         
         $cuadroTexto=new Input();
-        
-        $this->atributos [self::ID] = $this->atributos [self::ID];
         $this->atributos [self::TIPO] = self::HIDDEN;
         $this->atributos ["obligatorio"] = false;
         $this->atributos [self::ETIQUETA] = "";
@@ -43,16 +45,14 @@ class BotonHtml extends HtmlBase{
         
     }
     
-    function boton($datosConfiguracion, $misAtributos) {
+    private function boton($datosConfiguracion) {
         
-        $this->setAtributos ( $misAtributos );
-        
-        if($misAtributos [self::ESTILOBOTON]=='jqueryui'){
-            $misAtributos [self::ESTILOBOTON]='ui-button ui-state-default ui-corner-all ui-button-text-only';
+        if($this->atributos [self::ESTILOBOTON]=='jqueryui'){
+            $this->atributos [self::ESTILOBOTON]='ui-button ui-state-default ui-corner-all ui-button-text-only';
         }
         if ($this->atributos [self::TIPO] == "boton") {
             $this->cadenaBoton = "<button ";
-            $this->cadenaBoton .= "class='".$misAtributos [self::ESTILOBOTON]."' ";
+            $this->cadenaBoton .= "class='".$this->atributos [self::ESTILOBOTON]."' ";
             $this->cadenaBoton .= self::HTMLVALUE . "'" . $this->atributos [self::VALOR] . "' ";
             $this->cadenaBoton .= "id='" . $this->atributos [self::ID] . "A' ";
             $this->cadenaBoton .= self::HTMLTABINDEX . "'" . $this->atributos [self::TABINDEX] . "' ";

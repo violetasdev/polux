@@ -4,26 +4,29 @@ require_once ("core/builder/HtmlBase.class.php");
 class RadioButtonHtml extends HtmlBase{
     
     function campoBotonRadial($atributos) {
+        
+        $this->setAtributos ( $atributos );
+        $this->campoSeguro();
     
-        if (isset ( $atributos [self::ESTILO] ) && $atributos [self::ESTILO] != "") {
-            $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . "'>\n";
+        if (isset ( $this->atributos [self::ESTILO] ) && $this->atributos [self::ESTILO] != "") {
+            $this->cadenaHTML = "<div class='" . $this->atributos [self::ESTILO] . "'>\n";
         } else {
             $this->cadenaHTML = "<div class='campoBotonRadial'>\n";
         }
     
-        if (isset ( $atributos [self::ETIQUETA] ) && $atributos [self::ETIQUETA] != "") {
-            $this->cadenaHTML .= $this->etiqueta ( $atributos );
+        if (isset ( $this->atributos [self::ETIQUETA] ) && $this->atributos [self::ETIQUETA] != "") {
+            $this->cadenaHTML .= $this->etiqueta ( $this->atributos );
         }
     
-        $this->cadenaHTML .= $this->radioButton ( $this->configuracion, $atributos );
+        $this->cadenaHTML .= $this->radioButton ();
         $this->cadenaHTML .= "\n</div>\n";
         return $this->cadenaHTML;
     
     }
     
-    function radioButton($misAtributos) {
+    function radioButton() {
     
-        $this->setAtributos ( $misAtributos );
+        $this->setAtributos ( $this->atributos );
         $this->miOpcion = "";
         $nombre = $this->atributos [self::ID];
         $id = "campo" . rand ();

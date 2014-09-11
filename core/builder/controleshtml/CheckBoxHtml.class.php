@@ -7,6 +7,8 @@ class CheckBoxHtml extends HtmlBase{
     function campoCuadroSeleccion($atributos) {
     
         $this->cadenaHTML = "";
+        
+        $this->campoSeguro();
     
         if (! isset ( $atributos [self::SINDIVISION] )) {
     

@@ -35,6 +35,7 @@ class Div extends HtmlBase {
     
     function division($tipo, $atributos = "") {
         
+        $this->campoSeguro();        
         $this->cadenaHTML = "";
         if ($tipo == self::INICIO) {
             if (isset ( $atributos [self::ESTILO] )) {
@@ -121,6 +122,9 @@ class Div extends HtmlBase {
      */
     
     function campoMensaje($atributos) {
+        
+        $this->campoSeguro();
+        
         if( isset ( $atributos ['json'] )){
 
             $atributos[self::MENSAJE]=$this->campoMensajeJson($atributos);

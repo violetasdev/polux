@@ -1,4 +1,5 @@
 <?php
+
 namespace bloquesModelo\bloqueModelo1;
 
 // Evitar un acceso directo a este archivo
@@ -9,8 +10,8 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 
 // Todo bloque debe implementar la interfaz Bloque
 include_once ("core/builder/Bloque.interface.php");
-
 include_once ("core/manager/Configurador.class.php");
+include_once ("core/builder/FormularioHtml.class.php");
 
 // Elementos que constituyen un bloque típico CRUD.
 
@@ -28,17 +29,16 @@ include_once ("Lenguaje.class.php");
 
 // Esta clase actua como control del bloque en un patron FCE
 
-if (!class_exists ( '\\bloquesModelo\\bloqueModelo1\\Bloque' )) {
-
-class Bloque implements \Bloque {
+if (! class_exists ( '\\bloquesModelo\\bloqueModelo1\\Bloque' )) {
+    
+    class Bloque implements \Bloque {
         var $nombreBloque;
         var $miFuncion;
         var $miSql;
         var $miConfigurador;
-        public 
-
-        function __construct($esteBloque, $lenguaje = "") {
-            
+        var $miFormulario;
+        
+        public function __construct($esteBloque, $lenguaje = "") {
             
             // El objeto de la clase Configurador debe ser único en toda la aplicación
             $this->miConfigurador = \Configurador::singleton ();
@@ -57,12 +57,11 @@ class Bloque implements \Bloque {
             $this->miConfigurador->setVariableConfiguracion ( "rutaBloque", $ruta );
             $this->miConfigurador->setVariableConfiguracion ( "rutaUrlBloque", $rutaURL );
             
-            
-            $this->miFuncion = new Funcion();
-            $this->miSql = new Sql();
-            $this->miFrontera = new Frontera();
-            $this->miLenguaje = new Lenguaje();
-            
+            $this->miFuncion = new Funcion ();
+            $this->miSql = new Sql ();
+            $this->miFrontera = new Frontera ();
+            $this->miLenguaje = new Lenguaje ();
+            $this->miFormulario = new \FormularioHtml ();
         
         }
         public function bloque() {
@@ -74,40 +73,42 @@ class Bloque implements \Bloque {
                 /**
                  * Injección de dependencias
                  */
+                
+                // Para la frontera
                 $this->miFrontera->setSql ( $this->miSql );
                 $this->miFrontera->setFuncion ( $this->miFuncion );
+                $this->miFrontera->setFormulario ( $this->miFormulario );
                 $this->miFrontera->setLenguaje ( $this->miLenguaje );
                 
+                // Para la entidad
                 $this->miFuncion->setSql ( $this->miSql );
                 $this->miFuncion->setFuncion ( $this->miFuncion );
                 $this->miFuncion->setLenguaje ( $this->miLenguaje );
                 
-                
-                if (! isset ( $_REQUEST ['action'] )) {                    
+                if (! isset ( $_REQUEST ['action'] )) {
                     $this->miFrontera->frontera ();
                 } else {
                     
-                    $respuesta=$this->miFuncion->action ();
+                    $respuesta = $this->miFuncion->action ();
                 }
-                
             }
-        
         }
     }
+}
 // @ Crear un objeto bloque especifico
 // El arreglo $unBloque está definido en el objeto de la clase ArmadorPagina o en la clase ProcesadorPagina
 
-if(isset($_REQUEST["procesarAjax"])){
-    $unBloque["nombre"]=$_REQUEST["bloqueNombre"];
-    $unBloque["grupo"]=$_REQUEST["bloqueGrupo"];
-}   
+if (isset ( $_REQUEST ["procesarAjax"] )) {
+    $unBloque ["nombre"] = $_REQUEST ["bloqueNombre"];
+    $unBloque ["grupo"] = $_REQUEST ["bloqueGrupo"];
+}
 
-$this->miConfigurador->setVariableConfiguracion("esteBloque",$unBloque);
+$this->miConfigurador->setVariableConfiguracion ( "esteBloque", $unBloque );
 
 if (isset ( $lenguaje )) {
-    $esteBloque = new Bloque($unBloque, $lenguaje );
+    $esteBloque = new Bloque ( $unBloque, $lenguaje );
 } else {
-    $esteBloque = new Bloque( $unBloque );
+    $esteBloque = new Bloque ( $unBloque );
 }
 
 $esteBloque->bloque ();

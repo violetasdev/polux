@@ -10,6 +10,9 @@ require_once ("core/builder/HtmlBase.class.php");
 class Link  extends HtmlBase {
     
     function enlace($atributos) {
+        
+        $this->setAtributos ( $atributos );
+        $this->campoSeguro();
     
         $this->cadenaHTML = "";
         $this->cadenaHTML .= "<a ";

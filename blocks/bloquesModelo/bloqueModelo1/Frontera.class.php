@@ -15,7 +15,7 @@ class Frontera {
     var $sql;
     var $funcion;
     var $lenguaje;
-    var $formulario;
+    var $miFormulario;
     
     var 
 
@@ -36,7 +36,7 @@ class Frontera {
     }
     
     public function setFormulario($formulario) {
-        $this->formulario = $formulario;
+        $this->miFormulario = $formulario;
     }
     
     function frontera() {
@@ -55,35 +55,10 @@ class Frontera {
     
     function html() {
         
-        include_once ("core/builder/FormularioHtml.class.php");
+        //Como se tiene un solo formulario no es necesario un switch para cargarlo:
+        $this->ruta=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
+        include_once ($this->ruta . "/formulario/form.php");
         
-        $this->ruta = $this->miConfigurador->getVariableConfiguracion ( "rutaBloque" );
-        $this->miFormulario = new \FormularioHtml ();
-        
-        $miBloque = $this->miConfigurador->getVariableConfiguracion ( 'esteBloque' );
-        $resultado = $this->miConfigurador->getVariableConfiguracion ( 'errorFormulario' );
-        
-        if ($resultado && $resultado == $miBloque ['nombre']) {
-            
-            switch ($_REQUEST ['seleccionar']) {
-                
-                case '1' :
-                    include_once ($this->ruta . "/formulario/registrarPagina.php");
-                    break;
-                case '2' :
-                    include_once ($this->ruta . "/formulario/registrarBloque.php");
-                    break;
-                
-                case '3' :
-                    include_once ($this->ruta . "/formulario/armarPagina.php");
-                    break;
-            
-            }
-        
-        } else {
-            include_once ($this->ruta . "/formulario/registro.php");
-        }
-    
     }
 
 }

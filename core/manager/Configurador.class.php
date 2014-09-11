@@ -93,11 +93,28 @@ class Configurador {
     
     function variablesCodificadas(){
         
+        
         // La variable POST formSaraData contiene información codificada
-        if (isset ( $_REQUEST ["formSaraData"] )) {
-            $this->fabricaConexiones->crypto->decodificar_url ( $_REQUEST ["formSaraData"] );
+        if (isset ( $_REQUEST ['formSaraData'] )) {
+            
+            $dato=$_REQUEST ['formSaraData'];
+            unset($_REQUEST ['formSaraData']);
+            $campos=$_REQUEST;
+            $this->fabricaConexiones->crypto->decodificar_url ( $dato);
+            
+        }else{
+            $campos=array();
         }
         
+        //Si existen campos seguros se deben decodificar sus nombres
+        if(isset($_REQUEST['campoSeguro'])){
+            foreach ($campos as $clave=>$valor){
+                $dato=$this->fabricaConexiones->crypto->decodificar($clave);
+                $dato=substr ( $dato , 0, strlen($dato)-strlen($_REQUEST['campoSeguro']) );
+                $_REQUEST[$dato]=$valor;
+                unset($_REQUEST[$clave]);
+            }
+        }
         
     }
     

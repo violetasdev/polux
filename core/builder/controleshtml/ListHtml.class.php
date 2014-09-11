@@ -11,20 +11,23 @@ class ListHTML extends HtmlBase{
     
     
     function listaNoOrdenada($atributos) {
+        
+        $this->setAtributos ( $atributos );
+        $this->campoSeguro();
     
-        if (isset ( $atributos ['id'] )) {
-            $this->cadenaHTML = "<ul id='" . $atributos ['id'] . "' ";
+        if (isset ( $this->atributos ['id'] )) {
+            $this->cadenaHTML = "<ul id='" . $this->atributos ['id'] . "' ";
         } else {
             $this->cadenaHTML = "<ul ";
         }        
         
-        if(isset ( $atributos ['menu'] ) && $atributos ['menu']){
+        if(isset ( $this->atributos ['menu'] ) && $this->atributos ['menu']){
             $this->cadenaHTML .= "class='listaMenu' ";
         }
         
         $this->cadenaHTML .= ">";
     
-        foreach ( $atributos ["items"] as $clave => $valor ) {
+        foreach ( $this->atributos ["items"] as $clave => $valor ) {
             // La clave es la fila, el valor es un arreglo con los datos de cada columna
             // $arreglo[fila][columna] 
             
@@ -36,7 +39,7 @@ class ListHTML extends HtmlBase{
             
             $this->cadenaHTML .= '>';
     
-            $this->procesarValor ( $valor, $atributos, $clave );
+            $this->procesarValor ( $valor, $clave );
     
             $this->cadenaHTML .= "</li>";
         }
@@ -47,9 +50,9 @@ class ListHTML extends HtmlBase{
     
     }
     
-    private function procesarValor($valor, $atributos, $clave) {
+    private function procesarValor($valor, $clave) {
         
-        if(isset ( $atributos ['menu'] ) && $atributos ['menu']){
+        if(isset ( $this->atributos ['menu'] ) && $this->atributos ['menu']){
             $claseEnlace= "class='enlaceMenu' ";
         }else{
             $claseEnlace='';
@@ -63,7 +66,7 @@ class ListHTML extends HtmlBase{
                 $icono = '';
             }
     
-            if (isset ( $valor ['enlace'] ) && $atributos ['estilo'] == self::JQUERYUI) {
+            if (isset ( $valor ['enlace'] ) && $this->atributos ['estilo'] == self::JQUERYUI) {
                 $this->cadenaHTML .= "<a  id='pes" . $clave . "' ".$claseEnlace." href='" . $valor ['urlCodificada'] . "'>";
                 $this->cadenaHTML .= "<div id='tab" . $clave . "' class='ui-accordion ui-widget ui-helper-reset'>";
                 $this->cadenaHTML .= "<span class='ui-accordion-header ui-state-default ui-accordion-icons ui-corner-all'>" . $icono . $valor ['nombre'] . "</span>";
@@ -72,11 +75,11 @@ class ListHTML extends HtmlBase{
             }
         } else {
             // Podría implementarse llamando a $this->enlace
-            if (isset ( $atributos ["pestañas"] ) && $atributos ["pestañas"] == "true") {
+            if (isset ( $this->atributos ["pestañas"] ) && $this->atributos ["pestañas"] == "true") {
                 $this->cadenaHTML .= "<a id='pes" . $clave . "' ".$claseEnlace." href='#" . $clave . "'><div id='tab" . $clave . "'>" . $valor . "</div></a>";
             }
     
-            if (isset ( $atributos ["enlaces"] ) && $atributos ["enlaces"] == "true") {
+            if (isset ( $this->atributos ["enlaces"] ) && $this->atributos ["enlaces"] == "true") {
                 $enlace = explode ( '|', $valor );
                 $this->cadenaHTML .= "<a href='" . $enlace [1] . "' ".$claseEnlace.">" . $enlace [0] . "</a>";
             }

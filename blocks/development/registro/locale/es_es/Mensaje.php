@@ -10,6 +10,10 @@ $this->idioma ['errorDatos'] = '<p>Algunos datos del formulario no se han podido
 $this->idioma ['errorNombre'] = '<p>Ya existe una página registrada con ese nombre. Por favor cambie el nombre de la página e intente la operación de nuevo.</p>';
 $this->idioma ['seleccionar'] = 'Seleccionar acción:';
 
+$this->idioma ['nombreBloque'] = 'Nombre del bloque:';
+$this->idioma ['descripcionBloque'] = 'Descripción:';
+$this->idioma ['grupoBloque'] = 'Carpeta:';
+
 
 $this->idioma ['noDefinido'] = 'Etiqueta No definida';
 ?>
