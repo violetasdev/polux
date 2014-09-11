@@ -134,7 +134,7 @@ class Mysql extends ConectorDB {
     
     // Fin del método registro_db
     
-    private function procesarResultado($busqueda, $numeroRegistros) {
+ private function procesarResultado($busqueda, $numeroRegistros=0) {
         unset ( $this->registro );
         $this->campo = $busqueda->field_count;
         $this->conteo = $busqueda->num_rows;
@@ -143,7 +143,6 @@ class Mysql extends ConectorDB {
             
             $numeroRegistros = $this->conteo;
         }
-        
         /**
          * Obtener el nombre de las columnas
          */
@@ -158,9 +157,13 @@ class Mysql extends ConectorDB {
                     $i ++;
                 }
             }
+            for($unCampo = 0; $unCampo < $this->campo; $unCampo ++) { 
+                $this->registro [0] [$unCampo] = $salida [$unCampo];
+                $this->registro [0] [$this->claves [$unCampo]] = $salida [$unCampo];
+            }
         }
         
-        for($j = 0; $j < $numeroRegistros; $j ++) {
+        for($j = 1; $j < $numeroRegistros; $j ++) {
             
             $salida = $busqueda->fetch_array ( MYSQLI_BOTH );
             
