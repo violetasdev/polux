@@ -1,5 +1,5 @@
 <?php
-namespace bloquesModelo\bloqueModelo1;
+namespace bloquesModelo\bloqueModelo2;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
     include ("../index.php");

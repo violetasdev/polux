@@ -16,26 +16,26 @@ class TextArea  extends HtmlBase{
         
         $this->setAtributos ( $atributos );
         $this->campoSeguro();
-    
+        
         if ($atributos [self::ESTILO] == self::JQUERYUI) {
             $this->cadenaHTML = "<div>\n";
             $this->cadenaHTML .= "<fieldset class='ui-widget ui-widget-content'>\n";
-            $this->cadenaHTML .= "<legend class='ui-state-default ui-corner-all'>\n" . $atributos [self::ETIQUETA] . "</legend>\n";
-            $this->cadenaHTML .= $this->area_texto ( $this->configuracion, $atributos );
+            $this->cadenaHTML .= "<legend class='ui-state-default ui-corner-all'>\n" . $this->atributos [self::ETIQUETA] . "</legend>\n";
+            $this->cadenaHTML .= $this->area_texto ( $this->configuracion );
             $this->cadenaHTML .= "\n</fieldset>\n";
             $this->cadenaHTML .= "</div>\n";
             return $this->cadenaHTML;
         } else {
     
-            if (isset ( $atributos [self::ESTILO] ) && $atributos [self::ESTILO] != "") {
-                $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . "'>\n";
+            if (isset ( $this->atributos [self::ESTILO] ) && $this->atributos [self::ESTILO] != "") {
+                $this->cadenaHTML = "<div class='" . $this->atributos [self::ESTILO] . "'>\n";
             } else {
                 $this->cadenaHTML = "<div class='campoAreaTexto'>\n";
             }
     
-            $this->cadenaHTML .= $this->etiqueta ( $atributos );
+            $this->cadenaHTML .= $this->etiqueta ( $this->atributos );
             $this->cadenaHTML .= "<div class='campoAreaContenido'>\n";
-            $this->cadenaHTML .= $this->area_texto ( $this->configuracion, $atributos );
+            $this->cadenaHTML .= $this->area_texto ( $this->configuracion);
             $this->cadenaHTML .= "\n</div>\n";
             $this->cadenaHTML .= "</div>\n";
             return $this->cadenaHTML;
@@ -43,14 +43,11 @@ class TextArea  extends HtmlBase{
     
     }
     
-    function area_texto($datosConfiguracion, $misAtributos) {
-    
-        $this->setAtributos ( $misAtributos );
+    function area_texto($datosConfiguracion) {
     
         $this->mi_cuadro = "<textarea ";
     
         $this->mi_cuadro .= "id='" . $this->atributos [self::ID] . "' ";
-    
         $this->mi_cuadro .= $this->atributosGeneralesAreaTexto ();
     
         if (isset ( $this->atributos [self::ESTILOAREA] ) && $this->atributos [self::ESTILOAREA] != "") {

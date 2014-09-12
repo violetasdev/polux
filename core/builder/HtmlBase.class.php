@@ -4,10 +4,9 @@ include_once ("core/manager/Configurador.class.php");
 /**
  * Contiene las definiciones de los diferentes controles HTML
  *
-  * Listado de atributos que se requieren para definir el control:
- * 
- * $atributos['anchoEtiqueta']:        Entero. Define el ancho de la etqiueta en pixeles. 
- *         
+ * Listado de atributos que se requieren para definir el control:
+ *
+ * $atributos['anchoEtiqueta']: Entero. Define el ancho de la etqiueta en pixeles.
  */
 class HtmlBase {
     
@@ -119,7 +118,6 @@ class HtmlBase {
     
     const TEXTO = 'texto';
     
-    
     /**
      * Atributos HTML
      * Se definen como constantes para evitar errores al duplicar
@@ -152,34 +150,34 @@ class HtmlBase {
         
         $this->configuracion = $configuracion;
     
-    }   
+    }
     
     function etiqueta($misAtributos) {
-    
+        
         $this->setAtributos ( $misAtributos );
-    
+        
         $this->mi_etiqueta = "";
-    
+        
         if (! isset ( $this->atributos [self::SINDIVISION] )) {
             if (isset ( $this->atributos [self::ANCHOETIQUETA] )) {
-    
+                
                 $this->mi_etiqueta .= "<div style='float:left; width:" . $this->atributos [self::ANCHOETIQUETA] . "px' ";
             } else {
                 $this->mi_etiqueta .= "<div style='float:left; width:150px' ";
             }
-    
+            
             $this->mi_etiqueta .= ">";
         }
-    
+        
         $this->mi_etiqueta .= '<label ';
-    
+        
         if (isset ( $this->atributos ["estiloEtiqueta"] )) {
             $this->mi_etiqueta .= self::HTMLCLASS . "'" . $this->atributos ["estiloEtiqueta"] . "' ";
         }
-    
+        
         $this->mi_etiqueta .= "for='" . $this->atributos [self::ID] . "' >";
         $this->mi_etiqueta .= $this->atributos [self::ETIQUETA] . self::HTMLENDLABEL;
-    
+        
         if (isset ( $this->atributos ["etiquetaObligatorio"] ) && $this->atributos ["etiquetaObligatorio"]) {
             $this->mi_etiqueta .= "<span class='texto_rojo texto_pie'>* </span>";
         } else {
@@ -187,23 +185,29 @@ class HtmlBase {
                 $this->mi_etiqueta .= "<span style='white-space:pre;'> </span>";
             }
         }
-    
+        
         if (! isset ( $this->atributos [self::SINDIVISION] )) {
             $this->mi_etiqueta .= "</div>\n";
         }
-    
+        
         return $this->mi_etiqueta;
     
     }
-
-    function campoSeguro(){
+    
+    function campoSeguro() {
         
-        if(isset($this->atributos['campoSeguro']) && $this->atributos['campoSeguro'] && $this->atributos [self::ID]!='formSaraData'){
-            $this->atributos [self::ID]=$this->miConfigurador->fabricaConexiones->crypto->codificar($this->atributos [self::ID].$_REQUEST['tiempo']);
-            $this->atributos [self::NOMBRE]=$this->atributos [self::ID];
+        if (isset ( $_REQUEST ['tiempo'] )) {
+            $this->atributos ['tiempo'] = $_REQUEST ['tiempo'];
+        }
+        
+        if (isset ( $this->atributos ['campoSeguro'] ) && $this->atributos ['campoSeguro'] && $this->atributos [self::ID] != 'formSaraData') {
+            $this->atributos [self::ID] = $this->miConfigurador->fabricaConexiones->crypto->codificar ( $this->atributos [self::ID] . $this->atributos ['tiempo'] );
+            $this->atributos [self::NOMBRE] = $this->atributos [self::ID];
         
         }
     }
+    
+    
 
 }
 ?>

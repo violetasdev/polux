@@ -65,6 +65,10 @@ class Frontera {
         
         if ($resultado && $resultado == $miBloque ['nombre']) {
             
+            if(!isset($_REQUEST ['seleccionar'])){
+                $_REQUEST ['seleccionar']=0;
+            }
+            
             switch ($_REQUEST ['seleccionar']) {
                 
                 case '1' :
@@ -77,6 +81,9 @@ class Frontera {
                 case '3' :
                     include_once ($this->ruta . "/formulario/armarPagina.php");
                     break;
+                    
+                default:
+                    include_once ($this->ruta . "/formulario/registro.php");
             
             }
         

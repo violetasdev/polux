@@ -13,11 +13,14 @@ class Redireccionador {
 		
 		switch ($opcion) {
 			
-			case "consultaOK" :
+			case "opcion1" :
 				
 				$variable = 'pagina=segundaPagina';
 				$variable .= '&variable' . $valor;				
 				break;
+				
+			default:
+			    $variable='';
 			
 		}
 		foreach ( $_REQUEST as $clave => $valor ) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace bloquesModelo\bloqueModelo1\funcion;
+namespace bloquesModelo\bloqueModelo2\funcion;
 
 
 include_once('Redireccionador.php');
@@ -24,22 +24,9 @@ class FormProcessor {
     
     function procesarFormulario() {    
 
-        //Aquí va la lógica de procesamiento
-        
-        
-        //Al final se ejecuta la redirección la cual pasará el control a otra página
-        $variable='cualquierDato';
-        Redireccionador::redireccionar('opcion1',$variable);
-    	        
-    }
-    
-    function resetForm(){
-        foreach($_REQUEST as $clave=>$valor){
-             
-            if($clave !='pagina' && $clave!='development' && $clave !='jquery' &&$clave !='tiempo'){
-                unset($_REQUEST[$clave]);
-            }
-        }
+        /**
+         * @todo lógica de procesamiento
+         */
     }
     
 }
