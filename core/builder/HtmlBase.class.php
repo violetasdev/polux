@@ -194,7 +194,7 @@ class HtmlBase {
     
     }
     
-    function campoSeguro() {
+    function campoSeguro($campo='') {
         
         if (isset ( $_REQUEST ['tiempo'] )) {
             $this->atributos ['tiempo'] = $_REQUEST ['tiempo'];
@@ -203,8 +203,11 @@ class HtmlBase {
         if (isset ( $this->atributos ['campoSeguro'] ) && $this->atributos ['campoSeguro'] && $this->atributos [self::ID] != 'formSaraData') {
             $this->atributos [self::ID] = $this->miConfigurador->fabricaConexiones->crypto->codificar ( $this->atributos [self::ID] . $this->atributos ['tiempo'] );
             $this->atributos [self::NOMBRE] = $this->atributos [self::ID];
-        
+            if($campo=='form'){
+                $_REQUEST['formSecureId']=$this->atributos [self::ID];
+            }
         }
+       
     }
     
     

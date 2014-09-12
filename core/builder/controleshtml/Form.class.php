@@ -66,7 +66,7 @@ class Form extends HtmlBase {
         
         $this->setAtributos ( $atributos );
         
-        $this->campoSeguro ();
+        $this->campoSeguro ('form');
         
         if (isset ( $this->atributos ['validar'] )) {
             $this->cadenaHTML .= '<script type="text/javascript">';

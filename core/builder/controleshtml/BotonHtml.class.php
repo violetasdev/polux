@@ -12,6 +12,10 @@ class BotonHtml extends HtmlBase{
         $this->setAtributos ( $atributos );
         
         $this->campoSeguro();
+        
+        if(isset($_REQUEST['formSecureId'])){
+            $this->atributos [self::NOMBREFORMULARIO]=$_REQUEST['formSecureId'];
+        }
 
         $this->cadenaHTML = '';
         
