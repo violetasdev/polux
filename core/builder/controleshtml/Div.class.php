@@ -35,6 +35,7 @@ class Div extends HtmlBase {
     
     function division($tipo, $atributos = "") {
         
+        $this->setAtributos ( $atributos );
         $this->campoSeguro();        
         $this->cadenaHTML = "";
         if ($tipo == self::INICIO) {
@@ -66,6 +67,8 @@ class Div extends HtmlBase {
     
     function cuadroMensaje($atributos) {
         
+        $this->setAtributos ( $atributos );
+        $this->campoSeguro();
         $this->cadenaHTML = "<div id='mensaje' class='" . $atributos ["tipo"] . " shadow " . $atributos [self::ESTILO] . "' >";
         $this->cadenaHTML .= "<span>" . $atributos ["mensaje"] . "</span>";
         $this->cadenaHTML .= "</div><br>";
@@ -74,6 +77,9 @@ class Div extends HtmlBase {
     }
     
     function campoTexto($atributos) {
+        
+        $this->setAtributos ( $atributos );
+        $this->campoSeguro();
         
         if (isset ( $atributos [self::ESTILO] ) && $atributos [self::ESTILO] != "") {
             if ($atributos [self::ESTILO] == self::JQUERYUI) {
@@ -123,7 +129,12 @@ class Div extends HtmlBase {
     
     function campoMensaje($atributos) {
         
+        $this->setAtributos ( $atributos );
         $this->campoSeguro();
+        
+        $this->cadenaHTML .=$this->efectos();
+        
+        
         
         if( isset ( $atributos ['json'] )){
 
@@ -139,7 +150,7 @@ class Div extends HtmlBase {
             $atributos [self::ESTILO] = 'campoMensaje';
         }
         
-        $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . "' ";
+        $this->cadenaHTML .= "<div class='" . $atributos [self::ESTILO] . "' ";
         
         if (isset ( $atributos [self::ESTILOENLINEA] ) && $atributos [self::ESTILOENLINEA] != "") {
             $this->cadenaHTML .= "style='" . $atributos [self::ESTILOENLINEA] . "' ";
@@ -292,6 +303,23 @@ class Div extends HtmlBase {
         return $cadenaTabla;
         
         
+    }
+    
+    private function efectos(){
+        $cadena='';
+        
+        
+        if(isset($this->atributos['efecto'])){
+            
+            
+            $efectos=explode(' ', $this->atributos['efecto']);
+            
+            if(in_array('desvanecer', $efectos)){
+                $cadena='<script>setTimeout(function() { $("#divMensaje").hide( "drop", { direction: "up" }, "slow" );}, 4000);</script>';
+            }            
+        }
+        
+        return $cadena;
     }
 
 }

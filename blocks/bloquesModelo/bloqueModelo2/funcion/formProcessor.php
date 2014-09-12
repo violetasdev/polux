@@ -2,9 +2,6 @@
 
 namespace bloquesModelo\bloqueModelo2\funcion;
 
-
-include_once('Redireccionador.php');
-
 class FormProcessor {
     
     var $miConfigurador;
@@ -27,6 +24,7 @@ class FormProcessor {
         /**
          * @todo lógica de procesamiento
          */
+        return false;
     }
     
 }

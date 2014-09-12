@@ -90,7 +90,21 @@ if (! class_exists ( '\\bloquesModelo\\bloqueModelo2\\Bloque' )) {
                 } else {
                     
                     $respuesta = $this->miFuncion->action ();
+                    
+                    /**
+                     * Esta sección es la que implementa el mecanismo tipo 2 (procesar y cargar la misma página)
+                     */
+                    // Si $respuesta==false, entonces el formulario muestra un mensaje de error.
+                    if (! $respuesta) {
+                        $miBloque = $this->miConfigurador->getVariableConfiguracion ( 'esteBloque' );
+                        $this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', $miBloque ['nombre'] );
+                    
+                    }
+                    if (! isset ( $_REQUEST ['procesarAjax'] )) {
+                        $this->miFrontera->frontera ();
+                    }
                 }
+            
             }
         }
     }
