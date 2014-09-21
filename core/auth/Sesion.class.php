@@ -2,6 +2,7 @@
 require_once ("core/auth/SesionSql.class.php");
 require_once ("core/auth/SesionBase.class.php");
 
+
 class Sesion extends SesionBase {
     
     private static $instancia;

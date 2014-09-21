@@ -162,7 +162,7 @@ class Input extends HtmlBase {
         // --------------Atributo class --------------------------------
         if (isset ( $this->atributos [self::ESTILO] ) && $this->atributos [self::ESTILO] != "") {
             
-            if ($this->atributos [self::ESTILO] == "jqueryui") {
+            if ($this->atributos [self::ESTILO] == 'jqueryui') {
                 $cadena .= "ui-widget ui-widget-content ui-corner-all ";
             } else {
                 $cadena .= $this->atributos [self::ESTILO] . " ";

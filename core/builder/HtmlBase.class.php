@@ -210,6 +210,17 @@ class HtmlBase {
        
     }
     
+    function definirEstilo(){
+        
+    if (!isset ( $this->atributos [self::ESTILO] )) {
+            $this->atributos[self::ESTILO]='';    
+        }else{
+            
+            $this->atributos[self::ESTILO] = str_replace('jqueryui', 'ui-widget ui-widget-content ui-corner-all', $this->atributos[self::ESTILO]);
+            $this->atributos[self::ESTILO] = str_replace('jquery', 'ui-widget ui-widget-content ui-corner-all', $this->atributos[self::ESTILO]);            
+        }
+    }
+    
     
 
 }

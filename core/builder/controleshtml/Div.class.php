@@ -36,24 +36,28 @@ class Div extends HtmlBase {
     function division($tipo, $atributos = "") {
         
         $this->setAtributos ( $atributos );
-        $this->campoSeguro();        
-        $this->cadenaHTML = "";
+        $this->campoSeguro();
+        $this->definirEstilo();        
+        
+        $this->cadenaHTML = '';
         if ($tipo == self::INICIO) {
-            if (isset ( $atributos [self::ESTILO] )) {
-                $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . "' ";
+            if (isset ( $this->atributos [self::ESTILO] )) {
+                
+                
+                $this->cadenaHTML = "<div class='" . $this->atributos [self::ESTILO] . "' ";
             } else {
                 $this->cadenaHTML = "<div ";
             }
             
-            if (isset ( $atributos [self::ESTILOENLINEA] ) && $atributos [self::ESTILOENLINEA] != "") {
-                $this->cadenaHTML .= "style='" . $atributos [self::ESTILOENLINEA] . "' ";
+            if (isset ( $this->atributos [self::ESTILOENLINEA] ) && $this->atributos [self::ESTILOENLINEA] != "") {
+                $this->cadenaHTML .= "style='" . $this->atributos [self::ESTILOENLINEA] . "' ";
             }
             
-            if (isset ( $atributos [self::TITULO] )) {
-                $this->cadenaHTML .= "title='" . $atributos [self::TITULO] . "' ";
+            if (isset ( $this->atributos [self::TITULO] )) {
+                $this->cadenaHTML .= "title='" . $this->atributos [self::TITULO] . "' ";
             }
             
-            $this->cadenaHTML .= "id='" . $atributos ["id"] . "' ";
+            $this->cadenaHTML .= "id='" . $this->atributos ["id"] . "' ";
             
             $this->cadenaHTML .= ">\n";
         } else {

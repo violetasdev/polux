@@ -17,10 +17,15 @@ class Img extends HtmlBase{
     function campoImagen($atributos) {
     
         if (isset ( $atributos [self::ESTILO] ) && $atributos [self::ESTILO] != "") {
-            $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . "'>\n";
+            $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . "' ";
         } else {
-            $this->cadenaHTML = "<div class='campoImagen'>\n";
+            $this->cadenaHTML = "<div class='campoImagen' ";
         }
+        
+        if (!isset ( $atributos [self::ID] )) {
+            $atributos [self::ID]=time();
+        }
+        $this->cadenaHTML .="id ='".$atributos [self::ID]."' name='".$atributos [self::ID] ."' >";
     
         $this->cadenaHTML .= "<div class='marcoCentrado'>\n";
         $this->cadenaHTML .= "<img src='" . $atributos ["imagen"] . "' ";
@@ -31,10 +36,7 @@ class Img extends HtmlBase{
     
         if (isset ( $atributos ["borde"] )) {
             $this->cadenaHTML .= "border='" . $atributos ["borde"] . "' ";
-        } else {
-            $this->cadenaHTML .= "border='0' ";
-        }
-    
+        } 
         if (isset ( $atributos [self::ANCHO] )) {
             if ($atributos [self::ANCHO] != "") {
                 $this->cadenaHTML .= "width='" . $atributos [self::ANCHO] . "' ";

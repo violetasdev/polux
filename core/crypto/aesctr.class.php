@@ -24,10 +24,6 @@ class AesCtr extends Aes {
      */
     public static function encrypt($plaintext, $password, $nBits) {
         
-        if ($password == "") {
-            $password = '0xel0t1l';
-        }
-        
         $blockSize = 16; // block size fixed at 16 bytes / 128 bits (Nb=4) for AES
         if (! ($nBits == 128 || $nBits == 192 || $nBits == 256))
             return ''; // standard allows 128/192/256 bit keys
