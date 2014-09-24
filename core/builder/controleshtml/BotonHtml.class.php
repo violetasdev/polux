@@ -22,12 +22,12 @@ class BotonHtml extends HtmlBase{
         $final='';
         
         if(!isset ( $atributos [self::ESTILOMARCO] ) || $atributos [self::ESTILOMARCO] == '' || $atributos [self::ESTILOMARCO] == 'jqueryui' ){
-            $atributos [self::ESTILO]='campoBoton';
+            $atributos [self::ESTILOMARCO]='campoBoton';
         }
         
         if (! isset ( $atributos [self::SINDIVISION] )) {
     
-            $this->cadenaHTML .= "<div class='" . $atributos [self::ESTILO] . "'>\n";
+            $this->cadenaHTML .= "<div class='" . $atributos [self::ESTILOMARCO] . "'>\n";
             
             $final='</div>';
         }

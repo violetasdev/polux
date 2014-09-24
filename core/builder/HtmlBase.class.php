@@ -54,6 +54,8 @@ class HtmlBase {
     
     const TIPO = 'tipo';
     
+    const MARCO = 'marco';
+    
     const ESTILO = 'estilo';
     
     const ESTILOENLINEA = 'estiloEnLinea';
@@ -194,7 +196,7 @@ class HtmlBase {
     
     }
     
-    function campoSeguro($campo='') {
+    function campoSeguro($campo = '') {
         
         if (isset ( $_REQUEST ['tiempo'] )) {
             $this->atributos ['tiempo'] = $_REQUEST ['tiempo'];
@@ -203,25 +205,66 @@ class HtmlBase {
         if (isset ( $this->atributos ['campoSeguro'] ) && $this->atributos ['campoSeguro'] && $this->atributos [self::ID] != 'formSaraData') {
             $this->atributos [self::ID] = $this->miConfigurador->fabricaConexiones->crypto->codificar ( $this->atributos [self::ID] . $this->atributos ['tiempo'] );
             $this->atributos [self::NOMBRE] = $this->atributos [self::ID];
-            if($campo=='form'){
-                $_REQUEST['formSecureId']=$this->atributos [self::ID];
+            if ($campo == 'form') {
+                $_REQUEST ['formSecureId'] = $this->atributos [self::ID];
             }
         }
-       
+    
     }
     
-    function definirEstilo(){
+    function definirEstilo($estilo = '') {
         
-    if (!isset ( $this->atributos [self::ESTILO] )) {
-            $this->atributos[self::ESTILO]='';    
-        }else{
+        if (! isset ( $this->atributos [self::ESTILO] )) {
+            $this->atributos [self::ESTILO] = $estilo;            
+        } else {
             
-            $this->atributos[self::ESTILO] = str_replace('jqueryui', 'ui-widget ui-widget-content ui-corner-all', $this->atributos[self::ESTILO]);
-            $this->atributos[self::ESTILO] = str_replace('jquery', 'ui-widget ui-widget-content ui-corner-all', $this->atributos[self::ESTILO]);            
+            $this->atributos [self::ESTILO] = str_replace ( 'jqueryui', 'ui-widget ui-widget-content ui-corner-all', $this->atributos [self::ESTILO] );
+            $this->atributos [self::ESTILO] = str_replace ( 'jquery', 'ui-widget ui-widget-content ui-corner-all', $this->atributos [self::ESTILO] );
         }
+        
+        if(isset($this->atributos[self::ESTILOMARCO])){
+            $this->atributos [self::ESTILOMARCO]=str_replace ("jqueryui" ,"ui-widget ui-widget-content ui-corner-all", $this->atributos [self::ESTILOMARCO] );
+        }
+    
     }
     
+    /**
+     * Crear la cadena para los atributos de id, name, title, tabindex,
+     * 
+     * @return string
+     */
+    function definirAtributosGenerales() {
+        
+        $cadena = '';
+        
+        if (isset ( $this->atributos [self::TITULO] ) && $this->atributos [self::TITULO] != "") {
+            $cadena .= "title='" . $this->atributos [self::TITULO] . "' ";
+        }
+        
+        if (! isset ( $this->atributos [self::ID] ) || $this->atributos [self::ID] != '') {
+            $this->atributos [self::ID] = 'controlSara';
+        
+        }
+        $cadena .= "id='" . $this->atributos [self::ID] . "' ";
+        
+        if (! isset ( $this->atributos [self::NOMBRE] )) {
+            $this->atributos [self::NOMBRE] = $this->atributos [self::ID];
+        }
+        
+        $cadena .= self::HTMLNAME . "'" . $this->atributos [self::NOMBRE] . "' ";
+        
+        if (! isset ( $this->atributos [self::TABINDEX] )) {
+            $this->atributos [self::TABINDEX] = 0;
+        }
+        $cadena .= self::HTMLTABINDEX . "'" . $this->atributos [self::TABINDEX] . "' ";
+        
+        if (isset ( $this->atributos [self::ESTILOENLINEA] ) && $this->atributos [self::ESTILOENLINEA] != "") {
+            $cadena .= "style='" . $this->atributos [self::ESTILOENLINEA] . "' ";
+        }
+        
+        return $cadena;
     
-
+    }
+    
 }
 ?>

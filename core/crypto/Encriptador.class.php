@@ -56,7 +56,7 @@ class Encriptador {
     
     function decodificar($cadena) {
         
-        
+
         if(function_exists('mcrypt_decrypt'))
         {
             $cadena=trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $this->securekey, base64_decode($input), MCRYPT_MODE_ECB));            
@@ -65,6 +65,7 @@ class Encriptador {
             $cadena=AesCtr::decrypt (base64_decode($cadena), $this->llave, 256 );
         }
         
+
         return  $cadena;
     
     }
@@ -89,7 +90,7 @@ class Encriptador {
      */
     function decodificar_url($cadena) { 
         
-        $cadena = decodificar($cadena);;
+        $cadena = $this->decodificar($cadena);;
         
         parse_str ( $cadena, $matriz);
         

@@ -27,23 +27,27 @@ require_once ("core/builder/HtmlBase.class.php");
 
 class Input extends HtmlBase {
     
+    var $cadenaHTML='';
+    
     function campoCuadroTexto($atributos) {
+        
+        $this->cadenaHTML='';
         
         $this->setAtributos ( $atributos );
         
         $this->campoSeguro ();
-        
-        $this->cadenaHTML ='';
                 
         $final = '';
         
-        if (! isset ( $this->atributos [self::ESTILO] )) {
-            $this->atributos [self::ESTILO] = 'campoCuadroTexto';
-        }
+        $this->definirEstilo('campoCuadroTexto');
         
-        if (isset ( $this->atributos ['marco'] ) && $this->atributos ['marco']) {
+        if (isset ( $this->atributos [self::MARCO] ) && $this->atributos [self::MARCO]) {
             
-            $this->cadenaHTML .= "<div class='" . $this->atributos [self::ESTILO] . " ";
+            if(isset($this->atributos[self::ESTILOMARCO])){
+                $this->cadenaHTML .=  "<div class='" . $this->atributos [self::ESTILOMARCO] . " ";
+            }else{
+                $this->cadenaHTML .= "<div class='" . $this->atributos [self::ESTILO] . " ";
+            }
             
             if (isset ( $this->atributos [self::COLUMNAS] ) && $this->atributos [self::COLUMNAS] != "" && is_numeric ( $this->atributos [self::COLUMNAS] )) {
                 
@@ -74,45 +78,30 @@ class Input extends HtmlBase {
         if ($atributos != '') {
             $this->setAtributos ( $atributos );
         }
-        
-        $cadena = '';
+        $cadena = '<input ';
         
         if (! isset ( $this->atributos [self::TIPO] ) || $this->atributos [self::TIPO] != self::HIDDEN) {
             
-            $this->mi_cuadro = '<input ';
+            //Desde HtmlBase
+            $cadena .= $this->definirAtributosGenerales();
             
-            $this->mi_cuadro .= $this->atributoClassCuadroTexto ();
+            $cadena .= $this->atributoClassCuadroTexto ();
             
-            $this->mi_cuadro .= $this->atributosGeneralesCuadroTexto ();
-            
-            if (! isset ( $this->atributos [self::MAXIMOTAMANNO] )) {
-                $this->atributos [self::MAXIMOTAMANNO] = 100;
-            }
-            
-            $cadena .= "maxlength='" . $this->atributos [self::MAXIMOTAMANNO] . "' ";
-            
-            // Si se utiliza ketchup
-            if (isset ( $this->atributos ["data-validate"] )) {
-                $cadena .= "data-validate='validate(" . $this->atributos ["data-validate"] . ")' ";
-            }
-            
-            // Si utiliza algun evento especial
-            if (isset ( $this->atributos [self::EVENTO] )) {
-                $cadena .= " " . $this->atributos [self::EVENTO] . " ";
-            }
-            $this->mi_cuadro .= self::HTMLTABINDEX . "'" . $this->atributos [self::TABINDEX] . "' ";
-            $this->mi_cuadro .= ">\n";
+            $cadena .= $this->atributosGeneralesCuadroTexto ();          
+        
         } else {
             
-            $this->mi_cuadro = "<input type='hidden' ";
-            $this->mi_cuadro .= self::HTMLNAME . "'" . $this->atributos [self::ID] . "' ";
-            $this->mi_cuadro .= "id='" . $this->atributos [self::ID] . "' ";
+            $cadena .= "type='hidden' ";
+            $cadena .= self::HTMLNAME . "'" . $this->atributos [self::ID] . "' ";
+            $cadena .= "id='" . $this->atributos [self::ID] . "' ";
             if (isset ( $this->atributos [self::VALOR] )) {
-                $this->mi_cuadro .= self::HTMLVALUE . "'" . $this->atributos [self::VALOR] . "' ";
+                $cadena .= self::HTMLVALUE . "'" . $this->atributos [self::VALOR] . "' ";
             }
-            $this->mi_cuadro .= ">";
+            
         }
-        return $this->mi_cuadro;
+        
+        $cadena .= ">\n";
+        return $cadena;
     
     }
     
@@ -126,20 +115,8 @@ class Input extends HtmlBase {
         
         $cadena .= "type='" . $this->atributos [self::TIPO] . "' ";
         
-        if (isset ( $this->atributos [self::TITULO] ) && $this->atributos [self::TITULO] != "") {
-            $cadena .= "title='" . $this->atributos [self::TITULO] . "' ";
-        }
-        
         if (isset ( $this->atributos [self::DESHABILITADO] ) && $this->atributos [self::DESHABILITADO]) {
             $cadena .= "readonly='readonly' ";
-        }
-        
-        $cadena .= "id='" . $this->atributos [self::ID] . "' ";
-        
-        if ($this->atributos [self::NOMBRE] != "") {
-            $cadena .= self::HTMLNAME . "'" . $this->atributos [self::NOMBRE] . "' ";
-        } else {
-            $cadena .= self::HTMLNAME . "'" . $this->atributos [self::ID] . "' ";
         }
         
         if (isset ( $this->atributos [self::VALOR] )) {
@@ -148,8 +125,22 @@ class Input extends HtmlBase {
         
         if (isset ( $this->atributos [self::TAMANNO] )) {
             $cadena .= "size='" . $this->atributos [self::TAMANNO] . "' ";
-        } else {
-            $cadena .= "size='50' ";
+        }
+        
+        if (! isset ( $this->atributos [self::MAXIMOTAMANNO] )) {
+            $this->atributos [self::MAXIMOTAMANNO] = 100;
+        }
+        
+        $cadena .= "maxlength='" . $this->atributos [self::MAXIMOTAMANNO] . "' ";
+        
+        // Si se utiliza ketchup
+        if (isset ( $this->atributos ["data-validate"] )) {
+            $cadena .= "data-validate='validate(" . $this->atributos ["data-validate"] . ")' ";
+        }
+        
+        // Si utiliza algun evento especial
+        if (isset ( $this->atributos [self::EVENTO] )) {
+            $cadena .= " " . $this->atributos [self::EVENTO] . " ";
         }
         
         return $cadena;
@@ -159,17 +150,10 @@ class Input extends HtmlBase {
     private function atributoClassCuadroTexto() {
         
         $cadena = self::HTMLCLASS . "'";
+        
         // --------------Atributo class --------------------------------
-        if (isset ( $this->atributos [self::ESTILO] ) && $this->atributos [self::ESTILO] != "") {
+        $cadena .= $this->atributos [self::ESTILO] . " ";
             
-            if ($this->atributos [self::ESTILO] == 'jqueryui') {
-                $cadena .= "ui-widget ui-widget-content ui-corner-all ";
-            } else {
-                $cadena .= $this->atributos [self::ESTILO] . " ";
-            }
-        } else {
-            $cadena .= "cuadroTexto ";
-        }
         
         // Si se utiliza jQuery-Validation-Engine
         if (isset ( $this->atributos ["validar"] )) {

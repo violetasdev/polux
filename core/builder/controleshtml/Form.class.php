@@ -66,6 +66,11 @@ class Form extends HtmlBase {
         
         $this->setAtributos ( $atributos );
         
+        if (! isset ( $this->atributos ['tipoEtiqueta'] )) {
+            $this->atributos ['tipoEtiqueta']= 'fin';
+        
+        }
+        
         $this->campoSeguro ('form');
         
         if (isset ( $this->atributos ['validar'] )) {
@@ -76,10 +81,7 @@ class Form extends HtmlBase {
             $this->cadenaHTML = '';
         }
         
-        if (! isset ( $this->atributos ['tipoEtiqueta'] )) {
-            $atributos ['tipoEtiqueta'] = 'fin';
         
-        }
         
         if (isset ( $this->atributos ['marco'] ) && $this->atributos ['marco']) {
             
