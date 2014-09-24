@@ -430,9 +430,6 @@ div.marcoCentrado {
 	width: 95%;
 	margin: 0px auto 0px auto;
 	border-collapse: collapse;
-	border-width: 0px 1px;
-	border-style: solid;
-	border-color: #000000;
 	border-spacing: 0px;
 	padding: 0px 0px;
 }

@@ -39,8 +39,6 @@ class Instalador {
         // Esta función se invoca si existe el indice instalador en el arreglo $_REQUEST
         $mensajeError = "";
         
-        
-        
         do {
             if (! $this->revisarFormulario ()) {
                 $mensajeError = "Los datos recibidos est&aacute;n corruptos!!!";
@@ -65,7 +63,7 @@ class Instalador {
             // 3. Crear la estructura en la base de datos
             $this->limpiarDB ();
             
-            if (! $this->poblar ('estructura')) {
+            if (! $this->poblar ( 'estructura' )) {
                 $mensajeError = "No se pudo crear la estructura de la base de datos!!!";
                 break;
             }
@@ -87,20 +85,19 @@ class Instalador {
             if (! $this->guardarRegistroRecursoDB ()) {
                 
                 $mensajeError = 'No se pudo guardar los registros de acceso a DB';
-                break;    
+                break;
             }
             
             // 7. Guardar los datos del módulo de desarrollo
             
-            
-            if(isset($_REQUEST['moduloDesarrollo'])){
-            
-            if (! $this->poblar('moduloDesarrollo')) {
+            if (isset ( $_REQUEST ['moduloDesarrollo'] )) {
                 
-                $mensajeError = 'No se pudo guardar los datos del módulo de desarrollo';
-                break;
-            
-            }
+                if (! $this->poblar ( 'moduloDesarrollo' )) {
+                    
+                    $mensajeError = 'No se pudo guardar los datos del módulo de desarrollo';
+                    break;
+                
+                }
             }
         
         } while ( false );
@@ -220,19 +217,19 @@ class Instalador {
         
         $linea = "<?php\n/*\n";
         $resultado &= fwrite ( $fp, $linea );
-        $linea = $this->codificar ( $_REQUEST ["dbsys"] );
+        $linea = $this->encriptador->codificar ( $_REQUEST ["dbsys"] );
         $resultado &= fwrite ( $fp, $linea . "\n" );
-        $linea = $this->codificar ( $_REQUEST ["dbdns"] );
+        $linea = $this->encriptador->codificar ( $_REQUEST ["dbdns"] );
         $resultado &= fwrite ( $fp, $linea . "\n" );
-        $linea = $this->codificar ( $_REQUEST ["dbpuerto"] );
+        $linea = $this->encriptador->codificar ( $_REQUEST ["dbpuerto"] );
         $resultado &= fwrite ( $fp, $linea . "\n" );
-        $linea = $this->codificar ( $_REQUEST ["dbnombre"] );
+        $linea = $this->encriptador->codificar ( $_REQUEST ["dbnombre"] );
         $resultado &= fwrite ( $fp, $linea . "\n" );
-        $linea = $this->codificar ( $_REQUEST ["dbusuario"] );
+        $linea = $this->encriptador->codificar ( $_REQUEST ["dbusuario"] );
         $resultado &= fwrite ( $fp, $linea . "\n" );
-        $linea = $this->codificar ( $_REQUEST ["dbclave"] );
+        $linea = $this->encriptador->codificar ( $_REQUEST ["dbclave"] );
         $resultado &= fwrite ( $fp, $linea . "\n" );
-        $linea = $this->codificar ( $_REQUEST ["prefijo"] );
+        $linea = $this->encriptador->codificar ( $_REQUEST ["prefijo"] );
         $resultado &= fwrite ( $fp, $linea . "\n" );
         $linea = "*/\n?>";
         $resultado &= fwrite ( $fp, $linea );
@@ -241,12 +238,6 @@ class Instalador {
         
         fclose ( $fp );
         return $resultado;
-    
-    }
-    
-    private function codificar($texto) {
-        
-        return AesCtr::encrypt ( $texto, "", 256 );
     
     }
     
@@ -309,11 +300,11 @@ class Instalador {
         }
     
     }
-    private function poblar($opcion='') {
-        if($opcion=='estructura'){
-        
-        $arquitectura = $_REQUEST ["raizDocumento"] . $_REQUEST ["site"] . "/install/estructura" . $_REQUEST ["dbsys"] . ".sql";
-        }else{
+    private function poblar($opcion = '') {
+        if ($opcion == 'estructura') {
+            
+            $arquitectura = $_REQUEST ["raizDocumento"] . $_REQUEST ["site"] . "/install/estructura" . $_REQUEST ["dbsys"] . ".sql";
+        } else {
             $arquitectura = $_REQUEST ["raizDocumento"] . $_REQUEST ["site"] . "/install/desarrollo.sql";
         }
         
