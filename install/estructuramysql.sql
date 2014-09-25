@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `<nombre>dbms` (
   `puerto` int(6) NOT NULL,
   `conexionssh` char(50) NOT NULL,
   `db` char(100) NOT NULL,
+  `esquema` char(100) NOT NULL,
   `usuario` char(100) NOT NULL,
   `password` char(200) NOT NULL,
   PRIMARY KEY  (`idconexion`)

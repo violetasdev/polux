@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS "<nombre>dbms" (
   "puerto" int(6) NOT NULL,
   "conexionssh" char(50) COLLATE utf8_unicode_ci NOT NULL,
   "db" char(100) COLLATE utf8_unicode_ci NOT NULL,
+  "esquema" char(100) COLLATE utf8_unicode_ci NOT NULL,
   "usuario" char(100) COLLATE utf8_unicode_ci NOT NULL,
   "password" char(200) COLLATE utf8_unicode_ci NOT NULL
 );

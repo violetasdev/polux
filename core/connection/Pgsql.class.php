@@ -10,8 +10,8 @@
  * relacionadas con la base de datos POSTGRESQL.
  *
  * @name pgsql.class.php
- * @author Karen Palacios
- * @version Última revisión 11 de mayo de 2014
+ * @author Edwin Mauricio Sánchez, PAulo César Coronado, Karen Palacios
+ * @version Última revisión 24 de septiembre de 2014
  * @subpackage
  *
  *

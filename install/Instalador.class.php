@@ -233,6 +233,8 @@ class Instalador {
         $resultado &= fwrite ( $fp, $linea . "\n" );
         $linea = $this->encriptador->codificar ( $_REQUEST ["prefijo"] );
         $resultado &= fwrite ( $fp, $linea . "\n" );
+        $linea = $this->encriptador->codificar ( $_REQUEST ["dbesquema"] );
+        $resultado &= fwrite ( $fp, $linea . "\n" );
         $linea = "*/\n?>";
         $resultado &= fwrite ( $fp, $linea );
         $linea = $this->cuerpoPaginaConfiguracion ();

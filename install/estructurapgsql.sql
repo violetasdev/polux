@@ -65,14 +65,15 @@ DROP TABLE IF EXISTS <nombre>dbms;
 CREATE TABLE <nombre>dbms (
 
   idconexion SERIAL,
-  nombre char(50)  NOT NULL,
-  dbms char(20)  NOT NULL,
-  servidor char(50)  NOT NULL,
+  nombre varchar(50)  NOT NULL,
+  dbms varchar(20)  NOT NULL,
+  servidor varchar(50)  NOT NULL,
   puerto integer NOT NULL,
-  conexionssh char(50)  NOT NULL,
-  db char(100)  NOT NULL,
-  usuario char(100)  NOT NULL,
-  password char(200)  NOT NULL,
+  conexionssh varchar(50)  NOT NULL,
+  db varchar(100)  NOT NULL,
+  esquema varchar(100)  NOT NULL,
+  usuario varchar(100)  NOT NULL,
+  password varchar(200)  NOT NULL,
   PRIMARY KEY (idconexion)
 );
 
