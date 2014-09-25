@@ -20,6 +20,7 @@ $sitio = substr ( $_SERVER ["REQUEST_URI"], 0, $indice );
 $formulario = "variables";
 $validar = "control_vacio(" . $formulario . ",'dbdns','Direcci&oacute;n Servidor de Bases de Datos')";
 $validar .= "&&control_vacio(" . $formulario . ",'dbnombre','Nombre de la base de datos')";
+$validar .= "&&control_vacio(" . $formulario . ",'dbesquema','Esquema a utilizar')";
 $validar .= "&&control_vacio(" . $formulario . ",'dbusuario','Usuario de la base de datos')";
 $validar .= "&&control_vacio(" . $formulario . ",'dbclave','Clave de acceso a la base de datos')";
 $validar .= "&&control_vacio(" . $formulario . ",'dbsys','Sistema de Gesti&oacute;n de la Base de Datos')";
@@ -190,7 +191,15 @@ echo $formulario;
     } else {
         echo "0";
     }
-    ?>" /> <label>Nombre <span class="textoPequenno">Nombre de la base
+    ?>" /> <label>Esquema <span class="textoPequenno">Dejar vacio si hay un único esquema
+    </span></label> <input type="text"
+				name="dbesquema" id="dbesquema"
+				value="<?php
+    
+    if (isset ( $_REQUEST ["dbesquema"] )) {
+        echo $_REQUEST ["dbesquema"];
+    }
+    ?>" />  <label>Nombre <span class="textoPequenno">Nombre de la base
 					de datos principal</span></label> <input type="text"
 				name="dbnombre" id="dbNombre"
 				value="<?php

@@ -45,12 +45,14 @@ class Instalador {
                 break;
             }
             // Los campos al parecer son válidos:
+            
             // 1. determinar si se puede ingresar a la base de datos
             
             if (! $this->verificarConexionDB ()) {
                 $mensajeError = "No se puede conectar a la base de datos!!!";
                 break;
             }
+            
             
             // 2. Verificar si existe un archivo con la estructura de la base de datos
             
@@ -265,7 +267,7 @@ class Instalador {
         foreach ( $_REQUEST as $clave => $valor ) {
             $_REQUEST [$clave] = strip_tags ( $valor );
         }
-        if (isset ( $_REQUEST ["dbsys"] ) && $_REQUEST ["dbsys"] != "" && isset ( $_REQUEST ["dbdns"] ) && $_REQUEST ["dbdns"] != "" && isset ( $_REQUEST ["prefijo"] ) && isset ( $_REQUEST ["dbnombre"] ) && $_REQUEST ["dbnombre"] != "" && isset ( $_REQUEST ["dbusuario"] ) && $_REQUEST ["dbusuario"] != "" && isset ( $_REQUEST ["dbclave"] ) && $_REQUEST ["dbclave"] != "" && isset ( $_REQUEST ["nombreAplicativo"] ) && $_REQUEST ["nombreAplicativo"] != "" && isset ( $_REQUEST ["raizDocumento"] ) && $_REQUEST ["raizDocumento"] != "" && isset ( $_REQUEST ["host"] ) && $_REQUEST ["host"] != "" && isset ( $_REQUEST ["site"] ) && $_REQUEST ["site"] != "" && isset ( $_REQUEST ["nombreAdministrador"] ) && $_REQUEST ["nombreAdministrador"] != "" && isset ( $_REQUEST ["claveAdministrador"] ) && $_REQUEST ["claveAdministrador"] != "" && isset ( $_REQUEST ["correoAdministrador"] ) && $_REQUEST ["correoAdministrador"] != "" && isset ( $_REQUEST ["enlace"] ) && $_REQUEST ["enlace"] != "" && isset ( $_REQUEST ["googlemaps"] ) && isset ( $_REQUEST ["recatchapublica"] ) && isset ( $_REQUEST ["recatchaprivada"] ) && isset ( $_REQUEST ["expiracion"] ) && $_REQUEST ["expiracion"] != "") {
+        if (isset ( $_REQUEST ["dbsys"] ) && $_REQUEST ["dbsys"] != "" && isset ( $_REQUEST ["dbesquema"] ) && isset ( $_REQUEST ["dbdns"] ) && $_REQUEST ["dbdns"] != "" && isset ( $_REQUEST ["prefijo"] ) && isset ( $_REQUEST ["dbnombre"] ) && $_REQUEST ["dbnombre"] != "" && isset ( $_REQUEST ["dbusuario"] ) && $_REQUEST ["dbusuario"] != "" && isset ( $_REQUEST ["dbclave"] ) && $_REQUEST ["dbclave"] != "" && isset ( $_REQUEST ["nombreAplicativo"] ) && $_REQUEST ["nombreAplicativo"] != "" && isset ( $_REQUEST ["raizDocumento"] ) && $_REQUEST ["raizDocumento"] != "" && isset ( $_REQUEST ["host"] ) && $_REQUEST ["host"] != "" && isset ( $_REQUEST ["site"] ) && $_REQUEST ["site"] != "" && isset ( $_REQUEST ["nombreAdministrador"] ) && $_REQUEST ["nombreAdministrador"] != "" && isset ( $_REQUEST ["claveAdministrador"] ) && $_REQUEST ["claveAdministrador"] != "" && isset ( $_REQUEST ["correoAdministrador"] ) && $_REQUEST ["correoAdministrador"] != "" && isset ( $_REQUEST ["enlace"] ) && $_REQUEST ["enlace"] != "" && isset ( $_REQUEST ["googlemaps"] ) && isset ( $_REQUEST ["recatchapublica"] ) && isset ( $_REQUEST ["recatchaprivada"] ) && isset ( $_REQUEST ["expiracion"] ) && $_REQUEST ["expiracion"] != "") {
             return true;
         }
         return false;

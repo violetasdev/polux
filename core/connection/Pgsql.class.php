@@ -139,6 +139,11 @@ class Pgsql extends ConectorDb {
         if ($this->enlace) {
             // linea de codificacion de caracteres.
             pg_set_client_encoding ( $this->enlace, $this->charset );
+            
+            //Utilizar un esquema específico para toda la sesión
+            if($this->dbesquema!=''){
+            	$this->ejecutar_acceso_db('SET search_path TO '.$this->dbesquema);
+            }
             return $this->enlace;
         } else {
             $this->error = "PGSQL: Imposible conectar a la base de datos.";
@@ -366,6 +371,7 @@ class Pgsql extends ConectorDb {
         $this->usuario = $registro ["dbusuario"];
         $this->clave = $registro ["dbclave"];
         $this->dbsys = $registro ["dbsys"];
+        $this->dbesquema = $registro ['dbesquema'];
         
         $this->enlace = $this->conectar_db ();
     

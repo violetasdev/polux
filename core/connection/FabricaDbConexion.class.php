@@ -101,8 +101,10 @@ class FabricaDbConexion {
         
         if ($registro == '') {
             $gestorDb = new Dbms ( $this->configuracion );
+            
         } else {
-            $gestorDb = new Dbms ( $registro );
+        	$gestorDb = new Dbms ( $registro );
+        	
         }
         $recurso = $gestorDb->getRecursoDb ();
         

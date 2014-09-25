@@ -20,6 +20,8 @@ class ConectorDb implements Conector {
     
     var $dbsys;
     
+    var $dbesquema;
+    
     var $cadenaSql;
     
     var $error;

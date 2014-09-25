@@ -95,9 +95,7 @@ class Dbms {
         
         if (isset ( $this->dbsys )) {
             $clase = trim ( $this->dbsys );
-            
             $recurso = new $clase ( $this->configuracion );
-            
             if ($recurso) {
                 return $recurso;
             }
