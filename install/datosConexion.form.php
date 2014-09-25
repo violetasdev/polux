@@ -20,7 +20,6 @@ $sitio = substr ( $_SERVER ["REQUEST_URI"], 0, $indice );
 $formulario = "variables";
 $validar = "control_vacio(" . $formulario . ",'dbdns','Direcci&oacute;n Servidor de Bases de Datos')";
 $validar .= "&&control_vacio(" . $formulario . ",'dbnombre','Nombre de la base de datos')";
-$validar .= "&&control_vacio(" . $formulario . ",'dbesquema','Esquema a utilizar')";
 $validar .= "&&control_vacio(" . $formulario . ",'dbusuario','Usuario de la base de datos')";
 $validar .= "&&control_vacio(" . $formulario . ",'dbclave','Clave de acceso a la base de datos')";
 $validar .= "&&control_vacio(" . $formulario . ",'dbsys','Sistema de Gesti&oacute;n de la Base de Datos')";

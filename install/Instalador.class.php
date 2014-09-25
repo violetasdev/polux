@@ -130,6 +130,7 @@ class Instalador {
         $cadenaSql .= "puerto, ";
         $cadenaSql .= "conexionssh, ";
         $cadenaSql .= "db, ";
+        $cadenaSql .= "esquema, ";
         $cadenaSql .= "usuario, ";
         $cadenaSql .= "password ";
         $cadenaSql .= ") ";
@@ -141,6 +142,7 @@ class Instalador {
         $cadenaSql .= "'" . $_REQUEST ['dbpuerto'] . "',";
         $cadenaSql .= "'',";
         $cadenaSql .= "'" . $_REQUEST ['dbnombre'] . "',";
+        $cadenaSql .= "'" . $_REQUEST ['dbesquema'] . "',";
         $cadenaSql .= "'" . $_REQUEST ['dbusuario'] . "',";
         $cadenaSql .= "'" . $clave . "' ";
         $cadenaSql .= ")";
