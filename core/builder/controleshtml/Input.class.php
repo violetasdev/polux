@@ -51,7 +51,7 @@ class Input extends HtmlBase {
             
             if (isset ( $this->atributos [self::COLUMNAS] ) && $this->atributos [self::COLUMNAS] != "" && is_numeric ( $this->atributos [self::COLUMNAS] )) {
                 
-                $this->cadenaHTML .= " anchoColumna" . $this->atributos [self::COLUMNAS];
+                $this->cadenaHTML .= " campoCuadroTexto anchoColumna" . $this->atributos [self::COLUMNAS];
             }
             
             $this->cadenaHTML .= "'>\n";
