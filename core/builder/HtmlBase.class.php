@@ -120,6 +120,8 @@ class HtmlBase {
     
     const TEXTO = 'texto';
     
+    const ANCHOCAJA = 'anchoCaja';
+    
     /**
      * Atributos HTML
      * Se definen como constantes para evitar errores al duplicar
