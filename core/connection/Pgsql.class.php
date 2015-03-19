@@ -371,7 +371,7 @@ class Pgsql extends ConectorDb {
         $this->usuario = $registro ["dbusuario"];
         $this->clave = $registro ["dbclave"];
         $this->dbsys = $registro ["dbsys"];
-        $this->dbesquema = $registro ['dbesquema'];
+        $this->dbesquema = isset ( $registro ['dbesquema'])?$registro ['dbesquema']:''; 
         
         $this->enlace = $this->conectar_db ();
     
