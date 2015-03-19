@@ -212,38 +212,41 @@ class Instalador {
     
     function guardarDatosConfiguracion() {
         
-        $resultado = true;
         $configuracion = $_REQUEST ["raizDocumento"] . $_REQUEST ["site"] . "/config/config.inc.php";
         $fp = @fopen ( $configuracion, "w+" );
         if (! $fp) {
             return false;
         }
         
+        /**
+         * Se coloca línea por línea el fwrite para garantizar la decodificación de variables.
+         */
         $linea = "<?php\n/*\n";
-        $resultado &= fwrite ( $fp, $linea );
+        fwrite ( $fp, $linea );
         $linea = $this->encriptador->codificar ( $_REQUEST ["dbsys"] );
-        $resultado &= fwrite ( $fp, $linea . "\n" );
+        fwrite ( $fp, $linea . "\n" );
         $linea = $this->encriptador->codificar ( $_REQUEST ["dbdns"] );
-        $resultado &= fwrite ( $fp, $linea . "\n" );
+        fwrite ( $fp, $linea . "\n" );
         $linea = $this->encriptador->codificar ( $_REQUEST ["dbpuerto"] );
-        $resultado &= fwrite ( $fp, $linea . "\n" );
+        fwrite ( $fp, $linea . "\n" );
         $linea = $this->encriptador->codificar ( $_REQUEST ["dbnombre"] );
-        $resultado &= fwrite ( $fp, $linea . "\n" );
+        fwrite ( $fp, $linea . "\n" );
         $linea = $this->encriptador->codificar ( $_REQUEST ["dbusuario"] );
-        $resultado &= fwrite ( $fp, $linea . "\n" );
+        fwrite ( $fp, $linea . "\n" );
         $linea = $this->encriptador->codificar ( $_REQUEST ["dbclave"] );
-        $resultado &= fwrite ( $fp, $linea . "\n" );
+        fwrite ( $fp, $linea . "\n" );
         $linea = $this->encriptador->codificar ( $_REQUEST ["prefijo"] );
-        $resultado &= fwrite ( $fp, $linea . "\n" );
+        fwrite ( $fp, $linea . "\n" );
         $linea = $this->encriptador->codificar ( $_REQUEST ["dbesquema"] );
-        $resultado &= fwrite ( $fp, $linea . "\n" );
+        fwrite ( $fp, $linea . "\n" );
         $linea = "*/\n?>";
-        $resultado &= fwrite ( $fp, $linea );
+        fwrite ( $fp, $linea );
         $linea = $this->cuerpoPaginaConfiguracion ();
-        $resultado &= fwrite ( $fp, $linea );
+        fwrite ( $fp, $linea );
         
         fclose ( $fp );
-        return $resultado;
+        
+        return true;
     
     }
     
