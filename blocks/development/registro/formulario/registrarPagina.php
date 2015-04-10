@@ -206,6 +206,8 @@ class RegistradorPagina {
         echo $this->miFormulario->campoCuadroTexto ( $atributos );
         // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         
+        // ---------------- FIN SECCION: Controles del Formulario -------------------------------------------
+        
         // ------------------Division para los botones-------------------------
         $atributos ["id"] = "botones";
         $atributos ["estilo"] = "marcoBotones";
@@ -256,6 +258,9 @@ class RegistradorPagina {
         // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division ( "fin" );
         
+        
+        
+        
         // ------------------- SECCION: Paso de variables ------------------------------------------------
         
         /**
@@ -301,14 +306,14 @@ class RegistradorPagina {
         
         // ----------------FIN SECCION: Paso de variables -------------------------------------------------
         
-        // ---------------- FIN SECCION: Controles del Formulario -------------------------------------------
+       
         
         // ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
         // Se debe declarar el mismo atributo de marco con que se inició el formulario.
         $atributos ['marco'] = true;
         $atributos ['tipoEtiqueta'] = 'fin';
         echo $this->miFormulario->formulario ( $atributos );
-        // return $cadenaHTML;
+
     
     }
     
