@@ -110,6 +110,8 @@ class SesionBase {
         
         if (isset ( $_COOKIE ["aplicativo"] )) {
             $this->sesionId = $_COOKIE ["aplicativo"];
+        } else {
+            return FALSE;
         }
         
         $parametro ["sesionId"] = $this->sesionId;
