@@ -21,7 +21,7 @@ class AgregarReportico {
 
         $_REQUEST ['grupoBloque'] = $_REQUEST ['moduloPlugin'];
         
-        $_REQUEST ['dirOrigen'] = getcwd ().'/blocks/development/plugin/archivos/reportico/';
+        $_REQUEST ['dirOrigen'] = getcwd ().'/plugin/reportico/';
         $_REQUEST ['dirDestino'] = getcwd ().'/blocks/'.$_REQUEST ['moduloPlugin'].'/reportico/';
         
         
