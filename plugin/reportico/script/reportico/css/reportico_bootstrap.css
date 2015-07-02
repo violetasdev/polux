@@ -11,6 +11,7 @@
 #reportico_container
 {
     background-color: #ffffff;
+    position: relative;
 }
 
 .swPrpToolbarPane input
@@ -945,7 +946,7 @@ input.swAdminButton2
     padding: 5px;
     background-color: inherit;
     color: #555;
-    width: 225px !important;
+    width: 160px !important;
     text-align: left;
     
 }
@@ -957,17 +958,19 @@ input.swAdminButton2
     padding: 5px;
     background-color: inherit;
     color: #555;
-    width: 225px !important;
+    width: 160px !important;
     text-align: left;
 }
 
 .swMntVertTabMenuCellSel
 { 
+    width: 215px !important;
 }
 
 .swMntVertTabMenuCellUnsel
 { 
     border: 1px solid #bbb;
+    width: 215px !important;
 }
 
 .swMntVertTabMenuCellSel a
@@ -1087,10 +1090,31 @@ input.swAdminButton2
 }
 
 /* -------------------------- Printed Output Styles ----------------------------------*/
+.swPageHeaderBlock { display: block; width: 100%; position: relative; }
+.swPageHeader { position: absolute; }
+
+@page {
+    @top {
+        content: element(pageHeader);
+    }
+}
+
+#pageHeader {
+    background-color: #ff3333;
+    position: running(pageHeader);
+}
+
+
+/*@media screen {
+    .swPageHeaderBlock { display: none; }
+}*/
 
 @media print {
 
+    -webkit-print-color-adjust: exact;
+
     body { font-size: 10pt }
+    .swPageHeader { display: block; position: fixed; top: 0; }
     .swLinkMenu { display: none; }
     .swRepForm { border: none; }
     .swRepBody { width: 100%; margin: 0; border: none; }
