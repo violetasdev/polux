@@ -1655,7 +1655,7 @@ table .span24 {
 	*margin-right: .3em;
 	line-height: 14px;
 	vertical-align: text-top;
-	background-image: url("../img/glyphicons-halflings.png");
+	background-image: url("../script/img/glyphicons-halflings.png");
 	background-position: 14px 14px;
 	background-repeat: no-repeat;
 }
@@ -1666,7 +1666,7 @@ table .span24 {
 
 /* line 30, /Users/jonasvonandrian/.rvm/gems/ruby-1.9.3-p484/bundler/gems/sass-twitter-bootstrap-06795315e047/lib/bootstrap/_sprites.scss */
 .icon-white {
-	background-image: url("../img/glyphicons-halflings-white.png");
+	background-image: url("../script/img/glyphicons-halflings-white.png");
 }
 
 /* line 34, /Users/jonasvonandrian/.rvm/gems/ruby-1.9.3-p484/bundler/gems/sass-twitter-bootstrap-06795315e047/lib/bootstrap/_sprites.scss */
@@ -5097,7 +5097,7 @@ ol li.highlight {
 ol li.highlight > i.icon-move,
 ol li.highlight > i.icon-config,
 ol li.highlight > i.icon-remove {
-	background-image: url("../img/glyphicons-halflings-white.png");
+	background-image: url("../script/img/glyphicons-halflings-white.png");
 }
 
 /* line 42, /Users/jonasvonandrian/jquery-sortable/source/css/application.css.sass */
