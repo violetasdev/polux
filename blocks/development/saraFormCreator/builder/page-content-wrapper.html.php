@@ -16,16 +16,13 @@
 							<div class="panel-body">
 								<div class='row-fluid'>
 									<ol class='nested_with_no_drop vertical'>
-										<li class='highlight'><i class='icon-move'></i> formulario <i
-											class='icon-config' value='formulario'></i> <i
-											class='icon-remove' removable='false'></i>
-											<ol>
-											</ol></li>
-										<li class='highlight'><i class='icon-move'></i> division <i
-											class='icon-config' value='division'></i> <i
-											class='icon-remove' removable='false'></i>
-											<ol>
-											</ol></li>
+										<?php
+										foreach ($this->atributos['contenedores'] as $nombre){
+											echo "<li class='highlight'><i class='icon-move'></i> $nombre ";
+											echo "<i class='icon-config' value='$nombre'></i>";
+											echo '<i class=\'icon-remove\' removable=\'false\'></i><ol></ol></li>';
+										}
+										?>
 									</ol>
 								</div>
 							</div>
@@ -43,15 +40,13 @@
 							<div class="panel-body">
 								<div class='row-fluid'>
 									<ol class='nested_with_no_drop vertical'>
-										<li><i class='icon-move'></i> campoBoton <i
-											class='icon-config' value='campoBoton'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> campoCuadroTexto <i
-											class='icon-config' value='campoCuadroTexto'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> campoMensaje <i
-											class='icon-config' value='campoMensaje'></i> <i
-											class='icon-remove' removable='false'></i></li>
+										<?php
+										foreach ($this->atributos['componentesBasicos'] as $nombre){
+											echo "<li><i class='icon-move'></i> $nombre ";
+											echo "<i class='icon-config' value='$nombre'></i>";
+											echo '<i class=\'icon-remove\' removable=\'false\'></i></li>';
+										}
+										?>
 									</ol>
 								</div>
 							</div>
@@ -69,45 +64,13 @@
 							<div class="panel-body">
 								<div class='row-fluid'>
 									<ol class='nested_with_no_drop vertical'>
-										<li><i class='icon-move'></i> campoBotonRadial <i
-											class='icon-config' value='campoBotonRadial'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> campoCuadroLista <i
-											class='icon-config' value='campoCuadroLista'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> campoCuadroSeleccion <i
-											class='icon-config' value='campoCuadroSeleccion'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> campoFecha <i
-											class='icon-config' value='campoFecha'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> campoImagen <i
-											class='icon-config' value='campoImagen'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> campoTextArea <i
-											class='icon-config' value='campoTextArea'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> cuadro_lista <i
-											class='icon-config' value='cuadro_lista'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> cuadro_texto <i
-											class='icon-config' value='cuadro_texto'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> enlace <i class='icon-config'
-											value='enlace'></i> <i class='icon-remove' removable='false'></i>
-										</li>
-										<li><i class='icon-move'></i> enlaceWiki <i
-											class='icon-config' value='enlaceWiki'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> listaNoOrdenada <i
-											class='icon-config' value='listaNoOrdenada'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> marcoAgrupacion <i
-											class='icon-config' value='marcoAgrupacion'></i> <i
-											class='icon-remove' removable='false'></i></li>
-										<li><i class='icon-move'></i> recaptcha <i class='icon-config'
-											value='recaptcha'></i> <i class='icon-remove'
-											removable='false'></i></li>
+										<?php
+										foreach ($this->atributos['otrosComponentes'] as $nombre){
+											echo "<li><i class='icon-move'></i> $nombre ";
+											echo "<i class='icon-config' value='$nombre'></i>";
+											echo '<i class=\'icon-remove\' removable=\'false\'></i></li>';
+										}
+										?>
 									</ol>
 								</div>
 							</div>

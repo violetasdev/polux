@@ -11,6 +11,7 @@
 			"":0
 		},		
 		"footer1":[
+			"unset ( $atributos );",
 			"// -----------------FIN CONTROL: Botón Radial ------------------------------------"
 	    ],
 	    "content":false,
