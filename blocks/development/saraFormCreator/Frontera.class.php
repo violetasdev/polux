@@ -62,7 +62,9 @@ class Frontera {
         
         $miBloque = $this->miConfigurador->getVariableConfiguracion ( 'esteBloque' );
         $resultado = $this->miConfigurador->getVariableConfiguracion ( 'errorFormulario' );
-        
+		/*
+		 * Se llama al formulario de SARA Form Creator
+		 */
         include_once ($this->ruta . "/formulario/saraFormCreator.php");
     
     }

@@ -19,12 +19,18 @@ $(".menu-toggle").click(function(e) {
     // $("#editor").css("height",$(window).innerHeight()-40+"px");
 });
 
+/**
+ * Seinicia el editor con las variables consideradas 
+ */
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/eclipse");
 editor.getSession().setMode("ace/mode/php");
 $("#editor").css("height",$(window).innerHeight()-40+"px");
 // $("#sidebar-wrapper").css("width",$(window).innerWidth()*0.4+"px");
 
+/*
+ * Se carga un ejemplo de un formulario en el editor de código
+ */
 $.ajax({
   url: "<?php echo $rutaURL ?>/script/code/form.php.txt",
   beforeSend: function( xhr ) {
@@ -36,6 +42,10 @@ $.ajax({
   editor.insert(data);
 });
 
+/*
+ * Se carga los contenedores de componentes que se pueden arrastrar
+ * en este caso los del panel elementos en página
+ */
 $("ol.nested_with_drop").sortable({
 	group : 'nested',
 	handle : 'i.icon-move',
@@ -59,11 +69,18 @@ $("ol.nested_with_drop").sortable({
 	}
 });
 
+/*
+ * Se carga los contenedores de componentes que no se pueden arrastrar
+ * en este caso los del panel de componentes
+ */
 $("ol.nested_with_no_drop").sortable({
 	group : 'nested',
 	drop : false
 });
 
+/*
+ * Con el nombre del elemento se busca un archivo plantilla del mismo nombre en formato JSON
+ */
 function crearAtributos (elem,value){
 	$.getJSON("<?php echo $rutaURL ?>/script/elements/"+value+".json", function(result){
 //		console.log(value+".json")
@@ -74,6 +91,10 @@ function crearAtributos (elem,value){
 	});	
 }
 
+/*
+ * A partir del formato JSON se cargan los valores que se necesitan en los componentes
+ * todos los valores se guardan en el DOM en su respectivo elemento como atributos
+ */
 function replaceAttributesDefaultData(result){
 	var atributos = result.default.$atributos;
 	$.each(atributos,function (i,v){
@@ -86,12 +107,18 @@ function replaceAttributesDefaultData(result){
 	return result;
 }
 
+/*
+ * Evento relacionado al botón de configuración del componente
+ */
 function addClickEvent(elem){
 	$(elem).click(function(){
     	openDialog(elem);
     });
 }
 
+/*
+ * Evento relacionado al botón de eliminar el componente
+ */
 function addClickEvent2(elem){
 	$(elem).click(function(){
 		if($(this).attr('removable')=='true'){
@@ -102,7 +129,8 @@ function addClickEvent2(elem){
 
 /**
  * a partir de un tipo de elemento con valores, retorna el nodo con la estructura definida
- * @param {Object} elem
+ * en este caso el nodo son varias tablas con parámetros de configuración
+ * @param {Object} elemento del DOM exactamente de la clase .icon-config.
  */
 
 function createConfigNode(elem){
@@ -157,7 +185,8 @@ function createConfigNode(elem){
 }
 
 /**
- * Permite generar un arreglo de elementos <td> en el que se pueda 
+ * Permite generar un arreglo de elementos <td> (celdas) con inputs que contienen los valores que se
+ * le ingresan con sus repectivas opciones y demás. Simulando el comportamiento de un menú SELECT con INPUTS
  * @param key String con la llave del atributo
  * @param value String con el valor predeterminado del atributo
  * @param options Array con los valores que puede tener el atributo
@@ -173,6 +202,9 @@ function crearTdKeyValueOptions(key,value,options){
 	return [td1,td2];
 }
 
+/**
+ * Evento relacionado a el click en los inputs que se presentan en la ventana de configuración de elementos (MODAL Boostrap) 
+ */
 function clickInInputOptions(a){
 	var elem = a.target;
 	if ($(elem).parent().children("select")[0]){
@@ -202,6 +234,9 @@ function clickInInputOptions(a){
 	}
 }
 
+/**
+ * Permite generar un arreglo de elementos <td> (celdas) con input (tiene una opción predeterminada)
+ */
 function crearTdKeyValue(key,value){
 	var td1 = $("<td>").html(key);
 	var input = $("<input>").addClass("form-control").attr("key",key).attr("value",value);
@@ -209,6 +244,10 @@ function crearTdKeyValue(key,value){
 	return [td1,td2];
 }
 
+/**
+ * Permite generar un arreglo de elementos <td> (celdas) con TEXTAREA (areas de edición de texto)
+ * con un valor predeterminado que puede ser modificado
+ */
 function crearTdTextAreaKeyValue(key,arreglo){
 	var valor = new String();
 	$.each(arreglo,function(i,v){
@@ -224,6 +263,10 @@ function crearTdTextAreaKeyValue(key,arreglo){
 	return [td1,td2];
 }
 
+/**
+ * Lee los parámetros configurados en las tablas que están en el diálogo de configuración del componente
+ * y los guarda en el nodo del DOM que representa al componente
+ */
 function saveDataInNode(){
 	$(".table1 tr>td:nth-child(2)").children("input,textarea").each(function(i,v){
 		var key = $(v).attr("key");
@@ -249,6 +292,9 @@ function saveDataInNode(){
 	$('#myModal').modal('hide');
 }
 
+/*
+ * Abre el diálogo de configuración almacenando el elemento que fue invocado en una variable global
+ */
 function openDialog(elem){
 	elementoActual = elem;
 	var tabla = createConfigNode(elem);
@@ -257,11 +303,17 @@ function openDialog(elem){
 	$('#myModal').modal('show');
 }
 
+/*
+ * Todos los elementos que tienen esta clase (en este caso todos los elementos creados y con archivo de configuración JSON)
+ * se configuran poniendoles sus atributos respectivos (del archivo JSON al nodo en el DOM)
+ */
 $(".nested_with_no_drop .icon-config").each(function( index ) {
   crearAtributos(this,$(this).attr('value'));
 });
 
-
+/*
+ * Actualiza el código en el editor de PHP
+ */
 function updateCode(){
 	var contenido = $('#contenidoFormulario').children();
 	var texto = searchChildComponents(contenido);
@@ -269,6 +321,9 @@ function updateCode(){
 	editor.insert(texto);
 }
 
+/*
+ * Guarda el código del editor en un archivo de texto
+ */
 function saveCode(){
 	var textToWrite = editor.getValue();
 	var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
@@ -288,15 +343,20 @@ function saveCode(){
 		downloadLink.onclick = destroyClickedElement;
 		downloadLink.style.display = "none";
 		document.body.appendChild(downloadLink);
-	}
-	
+	}	
 	downloadLink.click();
 }
 
+/*
+ * Es el evento que elimina los nodos del DOM para el botón de eliminar componente
+ */
 function destroyClickedElement(event){
 	document.body.removeChild(event.target);
 }
 
+/*
+ * Busca los componentes y los convierte de la representación en objetos de javascript a código PHP
+ */
 function searchChildComponents(contenido){
 	var texto = new String();
 	$.each(contenido,function(i,v){
@@ -305,6 +365,9 @@ function searchChildComponents(contenido){
 	return texto;
 }
 
+/*
+ * Convierte los objetos del DOM .icon-config y los convierte a su representación en PHP 
+ */
 function convertirJSON2PHP(contenidonodo){
 	var nodo = $(contenidonodo).find('.icon-config')[0];
 	var valores = nodo.valores.default;
