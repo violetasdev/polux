@@ -9,7 +9,7 @@ $estilo = array ();
 $funcion [$indice] = "funciones.js";
 $indice ++;
 
-if (isset ( $_REQUEST ['jquery'] )) {
+if (isset ( $_REQUEST ['jquery'] ) && $_REQUEST ['jquery'] == 'true') {
     $funcion [$indice] = 'javascript/jquery.js';
     $indice ++;
     $funcion [$indice] = 'javascript/jquery-ui/jquery-ui.js';
