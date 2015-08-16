@@ -1,12 +1,12 @@
 -- Páginas
-INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-1,'development', 'Index módulo de desarrollo.', 'development', 0 ,'jquery=true' );
-INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-2,'cruder', 'Generador módulos CRUD.', 'development', 0 ,'jquery=true' );
-INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-3, 'desenlace', 'Analizar enlaces.', 'development', 0 ,'jquery=true' );
-INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-4, 'codificador', 'Codificar/decodificar cadenas.', 'development', 0 ,'jquery=true' );
-INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-5, 'registro', 'Registrar páginas o módulos.', 'development', 0 ,'jquery=true' );
-INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-6, 'constructor', 'Diseñar páginas.', 'development', 0 ,'jquery=true' );
-INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-7, 'plugin', 'Agregar plugin preconfigurados.', 'development', 0 ,'jquery=true' );
-INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-8, 'saraFormCreator', 'Módulo SARA form creator.', 'development', 0 ,'jquery=true' );
+INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-1,'development', 'Index módulo de desarrollo.', 'development', 0 ,'jquery=true&jquery-ui=true&jquery-validation=true' );
+INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-2,'cruder', 'Generador módulos CRUD.', 'development', 0 ,'jquery=true&jquery-ui=true&jquery-validation=true' );
+INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-3, 'desenlace', 'Analizar enlaces.', 'development', 0 ,'jquery=true&jquery-ui=true&jquery-validation=true' );
+INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-4, 'codificador', 'Codificar/decodificar cadenas.', 'development', 0 ,'jquery=true&jquery-ui=true&jquery-validation=true' );
+INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-5, 'registro', 'Registrar páginas o módulos.', 'development', 0 ,'jquery=true&jquery-ui=true&jquery-validation=true' );
+INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-6, 'constructor', 'Diseñar páginas.', 'development', 0 ,'jquery=true&jquery-ui=true&jquery-validation=true' );
+INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-7, 'plugin', 'Agregar plugin preconfigurados.', 'development', 0 ,'jquery=true&jquery-ui=true&jquery-validation=true' );
+INSERT INTO <nombre>pagina (id_pagina, nombre, descripcion, modulo, nivel, parametro) VALUES (-8, 'saraFormCreator', 'Módulo SARA form creator.', 'development', 0 ,'jquery=true&jquery-ui=true&jquery-validation=true' );
 -- Bloques
 INSERT INTO <nombre>bloque (id_bloque, nombre, descripcion, grupo) VALUES (-1,'menuLateral', 'Menú lateral módulo de desarrollo.', 'development');
 INSERT INTO <nombre>bloque (id_bloque, nombre, descripcion, grupo) VALUES (-2,'pie', 'Pie de página módulo de desarrollo.', 'development');
