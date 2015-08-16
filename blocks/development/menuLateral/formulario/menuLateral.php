@@ -58,6 +58,14 @@ $enlace = 'pagina=cruder';
 $enlace .= '&development=true';
 $items [$item] ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $enlace, $directorio );
 
+$item = 'saraFormCreator';
+$items [$item] ['nombre'] = 'SARA Form Creator';
+$items [$item] ['enlace'] = true; // El <li> es un enlace directo
+$items [$item] ['icono'] = 'ui-icon-circle-triangle-e'; // El <li> es un enlace directo
+$enlace = 'pagina=saraFormCreator';
+$enlace .= '&development=true';
+$items [$item] ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $enlace, $directorio );
+
 // Atributos generales para la lista
 $atributos ['id'] = 'menuLateral';
 $atributos ['estilo'] = 'jqueryui';
