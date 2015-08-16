@@ -80,27 +80,27 @@ class AgregarReportico {
         	        	
         	$archivo = getcwd ().'/blocks/'.$_REQUEST ['moduloPlugin'].'/reportico/script/reportico/reportico.php';
         	$cadena = "set_include_path('blocks/".$_REQUEST ['moduloPlugin']."/reportico/script/reportico');\n";
-        	$linea = 37;
+        	$linea = 38;
         	$vars_conf[] = array("archivo"=>$archivo, "cadena"=>$cadena, "linea"=>$linea);
         	
         	$archivo = getcwd ().'/blocks/'.$_REQUEST ['moduloPlugin'].'/reportico/script/reportico/reportico.php';
 			$cadena = "    var \$reportico_url_path = 'blocks/".$_REQUEST ['moduloPlugin']."/reportico/script/reportico';\n";        	
-			$linea = 464;
+			$linea = 476;
         	$vars_conf[] = array("archivo"=>$archivo, "cadena"=>$cadena, "linea"=>$linea);
         	
         	$archivo = getcwd ().'/blocks/'.$_REQUEST ['moduloPlugin'].'/reportico/script/reportico/reportico.php';
 			$cadena = "    var \$url_path_to_reportico_runner = 'blocks/".$_REQUEST ['moduloPlugin']."/reportico/script/reportico/run.php';\n";						
-        	$linea = 466;
+        	$linea = 478;
         	$vars_conf[] = array("archivo"=>$archivo, "cadena"=>$cadena, "linea"=>$linea);
         	
         	$archivo = getcwd ().'/blocks/'.$_REQUEST ['moduloPlugin'].'/reportico/script/reportico/reportico.php';
 			$cadena = "    var \$url_path_to_assets = 'blocks/".$_REQUEST ['moduloPlugin']."/reportico/script/reportico';\n";        	
-        	$linea = 468;
+        	$linea = 480;
         	$vars_conf[] = array("archivo"=>$archivo, "cadena"=>$cadena, "linea"=>$linea);
         	
         	$archivo = getcwd ().'/blocks/'.$_REQUEST ['moduloPlugin'].'/reportico/script/reportico/reportico.php';
 			$cadena = "    var \$url_path_to_calling_script = 'blocks/".$_REQUEST ['moduloPlugin']."/reportico/script/reportico';\n";        	
-        	$linea = 472;        	
+        	$linea = 490;        	
         	$vars_conf[] = array("archivo"=>$archivo, "cadena"=>$cadena, "linea"=>$linea);
         	
         	$_REQUEST ['variablesConf'] = $vars_conf;        	
