@@ -22,6 +22,7 @@ class RegistradorPagina {
     function procesarFormulario() {
         
         $resultado=true;
+        var_dump($_REQUEST);
         // 1. Verificar la integridad de las variables        
         if (! isset ( $_REQUEST ['nombrePagina'] ) || 
                 ! isset ( $_REQUEST ['descripcionPagina'] ) || 
@@ -31,6 +32,7 @@ class RegistradorPagina {
                 $_REQUEST ['nombrePagina']=='' || 
                 $_REQUEST ['nivelPagina']=='')
         {
+        	error_log ('REGISTRAR PAGINA: No estan todos los datos');
             $resultado = false;
         }else
         
