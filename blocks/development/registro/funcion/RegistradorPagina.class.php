@@ -22,7 +22,6 @@ class RegistradorPagina {
     function procesarFormulario() {
         
         $resultado=true;
-        var_dump($_REQUEST);
         // 1. Verificar la integridad de las variables        
         if (! isset ( $_REQUEST ['nombrePagina'] ) || 
                 ! isset ( $_REQUEST ['descripcionPagina'] ) || 
