@@ -1,4 +1,5 @@
 <?php
+var_dump($_REQUEST);
 if (isset ( $_REQUEST ['botonAceptar'] )) {
     
     $this->miConfigurador->fabricaConexiones->crypto->decodificar_url ( $_REQUEST ['campoCadena'] );
