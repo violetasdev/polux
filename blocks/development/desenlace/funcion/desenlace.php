@@ -1,6 +1,4 @@
 <?php
-
-
 if (isset ( $_REQUEST ['botonAceptar'] )) {
     
     $this->miConfigurador->fabricaConexiones->crypto->decodificar_url ( $_REQUEST ['campoCadena'] );
@@ -60,7 +58,7 @@ if (isset ( $_REQUEST ['botonAceptar'] )) {
                     		<td align="center">secci&oacute;n</td>
                     		<td align="center">posici&oacute;n</td>
                     	</tr>	
-                <?
+                <?php
                 for($contador = 0; $contador < count ( $registro ); $contador ++) {
                     ?>
                     <tr bgcolor="#ECECEC">
@@ -69,16 +67,14 @@ if (isset ( $_REQUEST ['botonAceptar'] )) {
                 		<td><? echo $registro[$contador][1] ?></td>
                 		<td><? echo $registro[$contador][2] ?></td>
                 	</tr>	
-                    <?
+                    <?php
                 }
                 ?>
                                 </table>
                     </div>
 
-<?
+<?php
             }
         }
     }
-}
-
-?>
+}?>

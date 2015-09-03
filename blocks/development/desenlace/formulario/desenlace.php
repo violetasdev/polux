@@ -117,7 +117,7 @@ $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
  * (a) invocando a la variable $_REQUEST ['tiempo'] que se ha declarado en ready.php o
  * (b) asociando el tiempo en que se está creando el formulario
  */ 
-$valorCodificado .= "&tiempo=" . $_REQUEST ['tiempo'];
+$valorCodificado .= "&tiempo=" . time();
 //Paso 2: codificar la cadena resultante
 $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar ( $valorCodificado );
 
