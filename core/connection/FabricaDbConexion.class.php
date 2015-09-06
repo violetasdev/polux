@@ -157,7 +157,7 @@ class FabricaDbConexion {
 			if ($this -> configuracion["dbesquema"] != '') {
 				$esquema = $this -> configuracion["dbesquema"] . '.';
 			}
-			$cadenaSql .= $this -> configuracion["dbprefijo"] . "dbms ";
+			$cadenaSql .= $esquema . $this -> configuracion["dbprefijo"] . "dbms ";
 			$cadenaSql .= "WHERE ";
 			return $cadenaSql .= "nombre='" . $variable . "'";
 
