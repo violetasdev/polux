@@ -118,6 +118,11 @@ class InspectorHTML {
 		 */
 		$valorCampo = trim($valorCampo);
 		$valorCampo = str_replace('\'', '\'\'', $valorCampo);
+		//Se propone guardar el string de los campos como carácteres html y luego si se necesita
+		//Decodificarlos con htmlspecialchars_decode
+		//$valorCampo = htmlspecialchars(nl2br($valorCampo),ENT_QUOTES);
+		//http://php.net/manual/en/pdo.quote.php
+		//http://php.net/manual/en/pdo.prepare.php
 		
 		return $valorCampo;
 	}
