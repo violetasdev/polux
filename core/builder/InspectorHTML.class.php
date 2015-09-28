@@ -60,19 +60,26 @@ class InspectorHTML {
 	/*
 	 * Permite validar un campo con un arreglo de parámetros al estilo jquery-validation-engine
 	 */
-	function validarCampo($valorCampo, $parametros, $corregir=false) {
+	function validarCampo($valorCampo, $parametros, $corregir=false, $showError=false) {
 		
 		if (isset($parametros['required'])) {
 			$campoVacio = ($valorCampo == '') ? false : true;
 			if (!$campoVacio) {
+				if($showError){
+					return array("errorType"=>"required","errorMessage"=>"Campo Vacío") ;
+				}
 				return false;
 			}
 		}
 
 		if (isset($parametros['minSize'])) {
-			$tamannoCampo = strlen($valorCampo);
+			//Al no usar esta codificación utf8 la longitud da diferente en javascript que en PHP
+			$tamannoCampo = strlen(utf8_decode($valorCampo));
 			if ($tamannoCampo<$parametros['minSize']) {
 				if(!$corregir){
+					if($showError){
+						return array("errorType"=>"minSize","errorMessage"=>"La longitud es menor a ".$parametros['maxSize']);
+					}
 					return false;
 				}
 				$faltante = $parametros['minSize'] - $tamannoCampo;
@@ -82,9 +89,13 @@ class InspectorHTML {
 		}
 		
 		if (isset($parametros['maxSize'])) {
-			$tamannoCampo = strlen($valorCampo);
+			//Al no usar esta codificación utf8 la longitud da diferente en javascript que en PHP
+			$tamannoCampo = strlen(utf8_decode($valorCampo));
 			if ($tamannoCampo>$parametros['maxSize']) {
 				if(!$corregir){
+					if($showError){
+						return array("errorType"=>"maxSize","errorMessage"=>"La longitud es mayor a ".$parametros['maxSize']);
+					}
 					return false;
 				}
 				$sobrante = $parametros['minSize'] - $tamannoCampo;
@@ -97,29 +108,35 @@ class InspectorHTML {
 			$miValidador = new ValidadorCampos();
 			$valido = $miValidador->validarTipo($valorCampo,$parametros['custom']);
 			if (!$valido) {
+				if($showError){
+					return array("errorType"=>"custom","errorMessage"=>"El campo no es del tipo ".$parametros['custom']);
+				}
 				return false;
 			}
 		}
 		
 		/*
 		 * Como se supone que ya superó la barrera de inyeccion SQl en la funcion limpiarSQL.
-		 * Se quitan ', y " para que pueda ejecutarse el SQL. No se hace un tipo de corrección
-		 * de ' (simple quote) con '' (doble simple quotes) para evitar los casos de inyección
-		 * SQL y no fomentar la inserción de carácteres raros en nombres de funciones. 
+		 * Se hace la corrección al insertar campos de texto con ' con el comodín ''. 
 		 */
-	    /*
+		/*
 		 * "'" - simple 
 		 * "\0" - NULL
-	     * "\t" - tab
-	     * "\n" - new line
-	     * "\x0B" - vertical tab
-	     * "\r" - carriage return
-	     * " " - ordinary white space
+		 * "\t" - tab
+		 * "\n" - new line
+		 * "\x0B" - vertical tab
+		 * "\r" - carriage return
+		 * " " - ordinary white space
 		 * "\x00" - NULL
 		 * "\x1a" - EOF
 		 */
-		$valorCampo = trim($valorCampo);var_dump($valorCampo);
-		$valorCampo = str_replace(array('\'','"'), ' " ', $valorCampo);
+		$valorCampo = trim($valorCampo);
+		$valorCampo = str_replace('\'', '\'\'', $valorCampo);
+		//Se propone guardar el string de los campos como carácteres html y luego si se necesita
+		//Decodificarlos con htmlspecialchars_decode
+		//$valorCampo = htmlspecialchars(nl2br($valorCampo),ENT_QUOTES);
+		//http://php.net/manual/en/pdo.quote.php
+		//http://php.net/manual/en/pdo.prepare.php
 		
 		return $valorCampo;
 	}
@@ -128,7 +145,7 @@ class InspectorHTML {
 	 * Permite que los valores de $_REQUEST se validen del lado del servidor con el módulo
 	 * ValidadorCampos de los componentes generales del CORE de SARA
 	 */
-	function validacionCampos($variables, $validadorCampos, $corregir=false) {
+	function validacionCampos($variables, $validadorCampos, $corregir=false, $showError=false) {
 
 		function get_string_between($string, $start, $end) {
 			$string = " " . $string;
@@ -163,10 +180,13 @@ class InspectorHTML {
 		foreach ($validadorCampos as $nombreCampo => $validador) {
 			if (isset($variables[$nombreCampo])) {
 				$parametros = separarParametros($validador);
-				$validez = $this -> validarCampo($variables[$nombreCampo], $parametros, $corregir);
+				$validez = $this -> validarCampo($variables[$nombreCampo], $parametros, $corregir, $showError);
 				if ($validez===false) {
 					return false;
-				} 
+				}
+				if (isset($validez['errorType'])) {
+					return "El campo \"".$nombreCampo."\" con valor \"".$variables[$nombreCampo]."\" arroja el error: \"".$validez['errorMessage']."\"";
+				}
 				$variables[$nombreCampo] = $validez;
 			}
 		}
