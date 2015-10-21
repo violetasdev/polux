@@ -53,16 +53,16 @@ class Tipos {
 		return $valor;
 	}
 	private function validarEntero($valor) {
-		$valor = ( int ) $valor;
-		return is_int ( $valor );
+		$entero = ( int ) $valor;
+		return (string)$entero === $valor;
 	}
 	private function evaluarEntero($valor) {
 		$valor = ( int ) $valor;
 		return is_int ( $valor ) ? $valor : false;
 	}
 	private function validarDoble($valor) {
-		$valor = ( float ) $valor;
-		return is_float ( $valor );
+		$flotante = ( float ) $valor;
+		return (string)$flotante === $valor;
 	}
 	private function evaluarDoble($valor) {
 		$valor = ( float ) $valor;
@@ -129,7 +129,7 @@ class Tipos {
 	}
 	
 	private function validarLetrasYEspacios($valor){
-		if (preg_match('/^([[:alpha:]]|[[:space:]])*$/',$valor)) {
+		if (preg_match('/^([[:alpha:]]|[[:space:]]|[áéíóú])*$/',$valor)) {
 			return true;
 		} else {
 			return false;
