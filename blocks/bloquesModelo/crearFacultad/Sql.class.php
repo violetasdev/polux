@@ -46,7 +46,7 @@ class Sql extends \Sql {
                 $cadenaSql .= 'facu_tel,';
                 $cadenaSql .= 'facu_mail,';
                 $cadenaSql .= 'facu_descri';
-                $cadenaSql .= ') ';
+                $cadenaSql .= ')';
                 $cadenaSql .= 'VALUES ';
                 $cadenaSql .= '(';
                 $cadenaSql .= '\'' . $_REQUEST ['nombreFacultad'] . '\', ';
