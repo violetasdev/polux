@@ -70,7 +70,6 @@ class Funcion {
         else if (isset ( $_REQUEST ["opcion"] )) {
         		
         	switch ($_REQUEST ["opcion"]) {
-        		
         
         		case 'registrar' :
         			$this->registrar();

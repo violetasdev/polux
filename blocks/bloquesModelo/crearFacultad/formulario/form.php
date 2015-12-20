@@ -91,7 +91,7 @@ class Formulario {
 		$atributos ['etiquetaObligatorio'] = true;
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['validar'] = 'required, maxSize[15]';
+		$atributos ['validar'] = 'required, maxSize[50]';
 		
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];

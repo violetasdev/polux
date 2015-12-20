@@ -14,10 +14,11 @@ class redireccion {
 		switch ($opcion) {
 			
 			case "inserto" :
+				var_dump($opcion);
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=confirma";
-				$variable .= "&facultad=" . $valor;
+				//$variable .= "&facultad=" . $valor;
 				break;
 			
 			case "noInserto" :
@@ -33,11 +34,16 @@ class redireccion {
 			unset ( $_REQUEST [$clave] );
 		}
 		
-		$enlace = $miConfigurador->getVariableConfiguracion ( "enlace" );
-		$variable = $miConfigurador->fabricaConexiones->crypto->codificar ( $variable );
+		$url = $miConfigurador->configuracion ["host"] . $miConfigurador->configuracion ["site"] . "/index.php?";
 		
-		$_REQUEST [$enlace] = $variable;
-		$_REQUEST ["recargar"] = true;
+		$enlace = $miConfigurador->configuracion ['enlace'];
+		//var_dump($variable);
+		$variable = $miConfigurador->fabricaConexiones->crypto->codificar ( $variable );
+		$_REQUEST [$enlace] = $enlace . '=' . $variable;
+		$redireccion = $url . $_REQUEST [$enlace];
+		
+		echo "<script>location.replace('" . $redireccion . "')</script>";
+		
 		
 		return true;
 	}
