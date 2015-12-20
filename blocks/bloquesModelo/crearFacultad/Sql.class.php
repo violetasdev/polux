@@ -39,8 +39,8 @@ class Sql extends \Sql {
              * Clausulas específicas
              */
             case 'registrar' :
-                $cadenaSql = 'INSERT INTO polux.ge_tfacu';
-                $cadenaSql .= '( ';
+                $cadenaSql = 'INSERT INTO trabajosdegrado.ge_tfacu';
+                $cadenaSql .= '(';
                 $cadenaSql .= 'facu_nom,';
                 $cadenaSql .= 'facu_dir,';
                 $cadenaSql .= 'facu_tel,';
