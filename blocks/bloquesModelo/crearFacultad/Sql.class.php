@@ -41,15 +41,14 @@ class Sql extends \Sql {
             case 'registrar' :
                 $cadenaSql = 'INSERT INTO polux.ge_tfacu';
                 $cadenaSql .= '( ';
-                $cadenaSql .= 'facu_facu,';
                 $cadenaSql .= 'facu_nom,';
                 $cadenaSql .= 'facu_dir,';
                 $cadenaSql .= 'facu_tel,';
                 $cadenaSql .= 'facu_mail,';
                 $cadenaSql .= 'facu_descri';
-                $cadenaSql .= ') ';
+                $cadenaSql .= ')';
                 $cadenaSql .= 'VALUES ';
-                $cadenaSql .= '( 3,';
+                $cadenaSql .= '(';
                 $cadenaSql .= '\'' . $_REQUEST ['nombreFacultad'] . '\', ';
                 $cadenaSql .= '\'' . $_REQUEST ['direccionFacultad'] . '\', ';
                 $cadenaSql .= '\'' . $_REQUEST ['telefonoFacultad'] . '\', ';
