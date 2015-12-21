@@ -212,11 +212,11 @@ class Formulario {
 		
 		// Paso 1: crear el listado de variables
 		
-		// $valorCodificado = "action=" . $esteBloque ["nombre"];
-		$valorCodificado = "pagina=inicio";
+		$valorCodificado = "action=" . $esteBloque ["nombre"]; //Ir pagina Funcionalidad
+		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );//Frontera mostrar formulario
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-		$valorCodificado .= "&opcion=mostrar";
+		$valorCodificado .= "&opcion=registrar";
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.
 		 * Para ello utiliza la hora en que es creado el formulario para
