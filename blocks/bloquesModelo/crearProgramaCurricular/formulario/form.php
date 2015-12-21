@@ -11,14 +11,12 @@ class Formulario {
 	var $lenguaje;
 	var $miFormulario;
 	
-	function __construct($lenguaje, $formulario) {
+	function __construct($lenguaje, $formulario, $sql) {
 		$this->miConfigurador = \Configurador::singleton ();
-		
 		$this->miConfigurador->fabricaConexiones->setRecursoDB ( 'principal' );
-		
 		$this->lenguaje = $lenguaje;
-		
 		$this->miFormulario = $formulario;
+		$this->miSql=$sql;
 	}
 	function formulario() {
 		
@@ -42,6 +40,10 @@ class Formulario {
 		 */
 		$atributosGlobales ['campoSeguro'] = 'true';
 		$_REQUEST ['tiempo'] = time ();
+		
+		$conexion='estructura';
+		$esteRecurso=$this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
+		//var_dump($esteRecurso);
 		
 		// -------------------------------------------------------------------------------------------------
 		
@@ -77,8 +79,47 @@ class Formulario {
 		$atributos ['linea'] = 'true';
 		echo $this->miFormulario->campoMensaje ( $atributos );
 		
+		
+		// ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
+		$esteCampo = 'seleccionar';
+		$atributos ['nombre'] = $esteCampo;
+		$atributos ['id'] = $esteCampo;
+		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['tab'] = $tab;
+		$atributos ['marco'] = true;
+		$atributos ['seleccion'] = - 1;
+		$atributos ['evento'] = '';
+		$atributos ['deshabilitado'] = false;
+		$atributos ['limitar'] = true;
+		$atributos ['tamanno'] = 1;
+		$atributos ['columnas'] = 1;
+		
+		$atributos ['estilo'] = 'jqueryui';
+		$atributos ['validar'] = 'required';
+		
+		
+		$atributos ["etiquetaObligatorio"] = true;
+		$atributos ['anchoEtiqueta'] = 150;
+		
+		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarFacultades");
+		$matrizItems=$esteRecurso->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+		
+		$atributos ['matrizItems'] = $matrizItems;
+		
+		if (isset ( $_REQUEST [$esteCampo] )) {
+			$atributos ['valor'] = $_REQUEST [$esteCampo];
+		} else {
+			$atributos ['valor'] = '';
+		}
+		
+		// Aplica atributos globales al control
+		$atributos = array_merge ( $atributos, $atributosGlobales );
+		echo $this->miFormulario->campoCuadroLista ( $atributos );
+		
+		// --------------- FIN CONTROL : Cuadro Lista --------------------------------------------------
+			
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-		$esteCampo = 'nombreFacultad';
+		$esteCampo = 'codigoProgramaCurricular';
 		$atributos ['id'] = $esteCampo;
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['tipo'] = 'text';
@@ -109,6 +150,7 @@ class Formulario {
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		
 		// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+		
 		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'nombreProgramaCurricular';
@@ -344,11 +386,11 @@ class Formulario {
 		
 		// Paso 1: crear el listado de variables
 		
-		// $valorCodificado = "action=" . $esteBloque ["nombre"];
-		$valorCodificado = "pagina=inicio";
+		$valorCodificado = "action=" . $esteBloque ["nombre"];
+		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-		$valorCodificado .= "&opcion=mostrar";
+		$valorCodificado .= "&opcion=registrar";
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.
 		 * Para ello utiliza la hora en que es creado el formulario para
@@ -412,7 +454,7 @@ class Formulario {
 	}
 }
 
-$miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario );
+$miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario, $this->sql);
 
 $miFormulario->formulario ();
 $miFormulario->mensaje ();

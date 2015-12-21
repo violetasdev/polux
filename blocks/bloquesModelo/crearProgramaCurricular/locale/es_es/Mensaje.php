@@ -4,8 +4,8 @@ $this->idioma["clave"]="Clave:";
 $this->idioma["usuarioTitulo"]="Número de documento";
 $this->idioma["claveTitulo"]="Clave de Acceso";
 
-$this->idioma["nombreFacultad"]="Facultad:";
-$this->idioma["nombreFacultadTitulo"]="Ingrese el nombre de la facultad";
+$this->idioma["codigoProgramaCurricular"]="Código:";
+$this->idioma["codigoProgramaCurricularTitulo"]="Ingrese el código del Programa Curricular";
 $this->idioma["nombreProgramaCurricular"]="Nombre:";
 $this->idioma["nombreProgramaCurricularTitulo"]="Ingrese el nombre del Programa Curricular";
 $this->idioma["direccionProgramaCurricular"]="Dirección:";
@@ -23,5 +23,10 @@ $this->idioma["botonCancelar"]="Cancelar";
 $this->idioma["noDefinido"]="No definido";
 $this->idioma["botonIngresar"]="Ingresar";
 $this->idioma["botonCrear"]="Crear Programa Curricular";
+$this->idioma["seleccionar"]="Facultad:";
+
+$this->idioma["mensajeRegistro"]="Programa curricular creado";
+$this->idioma["mensajeError"]="Error al crear el Programa Curricular";
+$this->idioma["continuar"]="Continuar";
 
 ?>
