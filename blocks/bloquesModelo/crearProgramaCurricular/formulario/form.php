@@ -97,9 +97,8 @@ class Formulario {
 		$atributos ['estilo'] = 'jqueryui';
 		$atributos ['validar'] = 'required';
 		
-		
 		$atributos ["etiquetaObligatorio"] = true;
-		$atributos ['anchoEtiqueta'] = 150;
+		$atributos ['anchoEtiqueta'] = 280;
 		
 		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarFacultades");
 		$matrizItems=$esteRecurso->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
@@ -131,7 +130,7 @@ class Formulario {
 		$atributos ['etiquetaObligatorio'] = true;
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['validar'] = 'required, maxSize[15]';
+		$atributos ['validar'] = 'required, maxSize[15], custom[onlyNumberSp]';
 		
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -232,7 +231,7 @@ class Formulario {
 		$atributos ['etiquetaObligatorio'] = true;
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['validar'] = 'required, maxSize[15]';
+		$atributos ['validar'] = 'required, maxSize[10], custom[onlyNumberSp]';
 		
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
