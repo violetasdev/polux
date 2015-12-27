@@ -1,6 +1,6 @@
 <?php
 
-namespace bloquesModelo\crearDocente\formulario;
+namespace bloquesModelo\registrarAnteproyecto\formulario;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
