@@ -37,8 +37,7 @@ class Sql extends \Sql {
 				$cadenaSql .= 'pern_papell,';
 				$cadenaSql .= 'pern_sapell,';
 				$cadenaSql .= 'pern_tdoc,';
-				$cadenaSql .= 'pern_doc,';
-				$cadenaSql .= 'pern_mail';
+				$cadenaSql .= 'pern_doc';
 				$cadenaSql .= ') ';
 				$cadenaSql .= 'VALUES ';
 				$cadenaSql .= '(';
@@ -46,19 +45,26 @@ class Sql extends \Sql {
 				$cadenaSql .= '\'' . $_REQUEST ['primerApellido'] . '\', ';
 				$cadenaSql .= '\'' . $_REQUEST ['segundoApellido'] . '\', ';
 				$cadenaSql .= $_REQUEST ['seleccionarTipoDocumento'] . ', ';
-				$cadenaSql .= $_REQUEST ['numeroDocIdentidad'] . ', ';
+				$cadenaSql .= $_REQUEST ['numeroDocIdentidad'] . ' ';
+				$cadenaSql .= ') ';
+				echo $cadenaSql;
+				var_dump($cadenaSql);
+				break;
+
+			case 'registrarUsuario' :
+				$cadenaSql = 'INSERT INTO trabajosdegrado.aut_tusua';
+				$cadenaSql .= '(';
+				$cadenaSql .= 'usua_usua,';
+				$cadenaSql .= 'usua_clave,';
+				$cadenaSql .= 'usua_mail';
+				$cadenaSql .= ') ';
+				$cadenaSql .= 'VALUES ';
+				$cadenaSql .= '(';
+				$cadenaSql .= '\'' . $_REQUEST ['codigoEstudiante'] . '\', ';
+				$cadenaSql .= '\'' . $_REQUEST ['password'] . '\', ';
 				$cadenaSql .= '\'' . $_REQUEST ['emailEstudiante'] . '\' ';
 				$cadenaSql .= ') ';
-				break;
-			
-			case 'buscarPersona' :
-				
-				$cadenaSql = 'SELECT ';
-				$cadenaSql .= 'pern_pern as CODIGO ';
-				$cadenaSql .= 'FROM ';
-				$cadenaSql .= 'trabajosdegrado.ge_tpern ';
-				$cadenaSql .= 'WHERE ';
-				$cadenaSql .= 'pern_doc=\'' . $_REQUEST ['numeroDocIdentidad'] . '\' ';
+				$cadenaSql .= " RETURNING usua_usua";
 				break;
 			
 			case 'registrarEstudiante' :
@@ -67,12 +73,13 @@ class Sql extends \Sql {
 				$cadenaSql .= 'estd_estd,';
 				$cadenaSql .= 'estd_pern,';
 				$cadenaSql .= 'estd_pcur,';
-				$cadenaSql .= 'estd_sem';
+				$cadenaSql .= 'estd_sem,';
+				$cadenaSql .= 'estd_usua';
 				$cadenaSql .= ') ';
 				$cadenaSql .= 'VALUES ';
 				$cadenaSql .= '(';
-				$cadenaSql .= $_REQUEST ['codigoEstudiante'] . ', ';
 				
+				$cadenaSql .= $_REQUEST ['codigoEstudiante'] . ', ';
 				$cadenaSql .= '(SELECT ';
 				$cadenaSql .= 'pern_pern ';
 				$cadenaSql .= 'FROM ';
@@ -80,8 +87,14 @@ class Sql extends \Sql {
 				$cadenaSql .= 'WHERE ';
 				$cadenaSql .= 'pern_doc=\'' . $_REQUEST ['numeroDocIdentidad'] . '\'), ';
 				$cadenaSql .= $_REQUEST ['seleccionarProgramaCurricular'] . ', ';
-				$cadenaSql .= $_REQUEST ['semestre'];
+				$cadenaSql .= $_REQUEST ['semestre']. ', ';
 				
+				$cadenaSql .= '(SELECT ';
+				$cadenaSql .= 'usua_usua ';
+				$cadenaSql .= 'FROM ';
+				$cadenaSql .= 'trabajosdegrado.aut_tusua ';
+				$cadenaSql .= 'WHERE ';
+				$cadenaSql .= 'usua_usua=\'' . $_REQUEST ['codigoEstudiante'] . '\') ';
 				$cadenaSql .= ')';
 				break;
 			

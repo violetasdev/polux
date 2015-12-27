@@ -1,6 +1,6 @@
 <?
 
-namespace bloquesModelo\crearDocente;
+namespace bloquesModelo\registrarAnteproyecto;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
     include ("../index.php");
@@ -59,7 +59,15 @@ class Frontera {
         $this->ruta=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
         
         if(isset($_REQUEST['opcion'])){
-        		
+        	switch ($_REQUEST ['opcion']) {
+        	
+        		case "mensaje" :
+        			include_once ($this->ruta . "/formulario/mensaje.php");
+        			break;
+        		case "continuar" :
+        			include_once ($this->ruta . "/formulario/form.php");
+        			break;
+        	}
         }else{
         	include_once ($this->ruta . "/formulario/form.php");
         }

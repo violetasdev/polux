@@ -22,6 +22,10 @@ $this->idioma["emailDocente"]="Email:";
 $this->idioma["emailDocenteTitulo"]="Ingrese el email";
 $this->idioma["tipoVinculacion"]="Tipo de vinculacion";
 $this->idioma["tipoVinculacionTitulo"]="Seleccione el tipo de vinculacion del docente";
+$this->idioma["password"]="Password:";
+$this->idioma["passwordTitulo"]="Ingrese password";
+$this->idioma["passConfirmado"]="Confirmar password:";
+$this->idioma["passConfirmadoTitulo"]="Ingrese password";
 
 $this->idioma["botonIngresar"]="Ingresar";
 $this->idioma["botonAceptar"]="Aceptar";

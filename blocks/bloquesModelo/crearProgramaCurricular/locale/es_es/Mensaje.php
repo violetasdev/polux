@@ -29,4 +29,5 @@ $this->idioma["mensajeRegistro"]="Programa curricular creado";
 $this->idioma["mensajeError"]="Error al crear el Programa Curricular";
 $this->idioma["continuar"]="Continuar";
 
+$this->idioma["marcoDatos"]="Datos del programa curricular";
 ?>

@@ -1,5 +1,5 @@
 <?php
-namespace bloquesModelo\crearDocente;
+namespace bloquesModelo\registrarAnteproyecto;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
     include ("../index.php");
@@ -48,6 +48,10 @@ class Funcion {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
     
+    function registrar() {
+    	include_once ($this->ruta . "/funcion/registrar.php");
+    }
+    
     function action() {
         
         $resultado = true;
@@ -62,7 +66,16 @@ class Funcion {
         if (isset ( $_REQUEST ['procesarAjax'] )) {
             $this->procesarAjax ();
         } 
+        else if (isset ( $_REQUEST ["opcion"] )) {
         
+        	switch ($_REQUEST ["opcion"]) {
+        
+        		case 'registrar' :
+        			$this->registrar();
+        			break;
+        
+        	}
+        }
         else{
             $resultado = $this->procesarFormulario ();
         }

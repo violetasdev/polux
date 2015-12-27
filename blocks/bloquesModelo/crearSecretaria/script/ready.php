@@ -1,4 +1,4 @@
-$("#contenido").validationEngine({
+$("#crearSecretaria").validationEngine({
 	promptPosition : "centerRight",
 	scroll: false,
 	autoHidePrompt: true,
@@ -10,3 +10,6 @@ $("#tablaReporte").dataTable({
 	"sPaginationType": "full_numbers"
 	
 });
+
+$('#<?php echo $this->campoSeguro('seleccionar')?>').width(280);
+$('#<?php echo $this->campoSeguro('seleccionar')?>').select2();

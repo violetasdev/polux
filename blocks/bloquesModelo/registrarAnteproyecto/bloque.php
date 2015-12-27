@@ -1,6 +1,6 @@
 <?php
 
-namespace bloquesModelo\crearDocente;
+namespace bloquesModelo\registrarAnteproyecto;
 
 // Evitar un acceso directo a este archivo
 if (! isset ( $GLOBALS ["autorizado"] )) {

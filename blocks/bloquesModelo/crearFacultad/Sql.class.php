@@ -53,6 +53,9 @@ class Sql extends \Sql {
                 $cadenaSql .= '\'' . $_REQUEST ['emailFacultad'] . '\', ';
                 $cadenaSql .= '\'' . $_REQUEST ['descripcionFacultad'] . '\'';
                 $cadenaSql .= ') ';
+                echo $cadenaSql;
+                var_dump($cadenaSql);
+                
                 break;
             
             case 'actualizarRegistro' :

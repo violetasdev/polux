@@ -25,4 +25,6 @@ $this->idioma["botonCrear"]="Crear";
 $this->idioma["mensajeRegistro"]="Faculad creada";
 $this->idioma["mensajeError"]="Error al crear la Faculad";
 $this->idioma["continuar"]="Continuar";
+
+$this->idioma["marcoDatos"]="Datos de la facultad";
 ?>

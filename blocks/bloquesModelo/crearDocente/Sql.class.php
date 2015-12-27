@@ -29,7 +29,7 @@ class Sql extends \Sql {
 		switch ($tipo) {
 			
 			/**
-			 * Clausulas especÃ­ficas
+			 * Clausulas específicas
 			 */
 			case 'registrarPersona' :
 				$cadenaSql = 'INSERT INTO trabajosdegrado.ge_tpern';
@@ -38,8 +38,7 @@ class Sql extends \Sql {
 				$cadenaSql .= 'pern_papell,';
 				$cadenaSql .= 'pern_sapell,';
 				$cadenaSql .= 'pern_tdoc,';
-				$cadenaSql .= 'pern_doc,';
-				$cadenaSql .= 'pern_mail';
+				$cadenaSql .= 'pern_doc';
 				$cadenaSql .= ') ';
 				$cadenaSql .= 'VALUES ';
 				$cadenaSql .= '(';
@@ -47,7 +46,21 @@ class Sql extends \Sql {
 				$cadenaSql .= '\'' . $_REQUEST ['primerApellido'] . '\', ';
 				$cadenaSql .= '\'' . $_REQUEST ['segundoApellido'] . '\', ';
 				$cadenaSql .= $_REQUEST ['seleccionarTipoDocumento'] . ', ';
-				$cadenaSql .= $_REQUEST ['numeroDocIdentidad'] . ', ';
+				$cadenaSql .= $_REQUEST ['numeroDocIdentidad'] . ' ';
+				$cadenaSql .= ') ';
+				break;
+			
+			case 'registrarUsuario' :
+				$cadenaSql = 'INSERT INTO trabajosdegrado.aut_tusua';
+				$cadenaSql .= '(';
+				$cadenaSql .= 'usua_usua,';
+				$cadenaSql .= 'usua_clave,';
+				$cadenaSql .= 'usua_mail';
+				$cadenaSql .= ') ';
+				$cadenaSql .= 'VALUES ';
+				$cadenaSql .= '(';
+				$cadenaSql .= '\'' . $_REQUEST ['codigoDocente'] . '\', ';
+				$cadenaSql .= '\'' . $_REQUEST ['password'] . '\', ';
 				$cadenaSql .= '\'' . $_REQUEST ['emailDocente'] . '\' ';
 				$cadenaSql .= ') ';
 				break;
@@ -58,7 +71,8 @@ class Sql extends \Sql {
 				$cadenaSql .= 'prof_prof,';
 				$cadenaSql .= 'prof_pern,';
 				$cadenaSql .= 'prof_pcur,';
-				$cadenaSql .= 'prof_tpvinc';
+				$cadenaSql .= 'prof_tpvinc,';
+				$cadenaSql .= 'prof_usua';
 				$cadenaSql .= ') ';
 				$cadenaSql .= 'VALUES ';
 				$cadenaSql .= '(';
@@ -71,7 +85,14 @@ class Sql extends \Sql {
 				$cadenaSql .= 'WHERE ';
 				$cadenaSql .= 'pern_doc=\'' . $_REQUEST ['numeroDocIdentidad'] . '\'), ';
 				$cadenaSql .= $_REQUEST ['seleccionarProgramaCurricular'] . ', ';
-				$cadenaSql .= '\'' . $_REQUEST ['tipoVinculacion'] . '\' ';
+				$cadenaSql .= '\'' . $_REQUEST ['tipoVinculacion'] . '\', ';
+				
+				$cadenaSql .= '(SELECT ';
+				$cadenaSql .= 'usua_usua ';
+				$cadenaSql .= 'FROM ';
+				$cadenaSql .= 'trabajosdegrado.aut_tusua ';
+				$cadenaSql .= 'WHERE ';
+				$cadenaSql .= 'usua_usua=\'' . $_REQUEST ['codigoDocente'] . '\') ';
 				
 				$cadenaSql .= ')';
 				break;
