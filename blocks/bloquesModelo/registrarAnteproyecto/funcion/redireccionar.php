@@ -41,7 +41,7 @@ class redireccion {
 		$_REQUEST [$enlace] = $enlace . '=' . $variable;
 		$redireccion = $url . $_REQUEST [$enlace];
 		
-		//echo "<script>location.replace('" . $redireccion . "')</script>";
+		echo "<script>location.replace('" . $redireccion . "')</script>";
 		
 		
 		return true;

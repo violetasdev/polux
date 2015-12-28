@@ -47,7 +47,6 @@ class Sql extends \Sql {
 				$cadenaSql .= $_REQUEST ['seleccionarTipoDocumento'] . ', ';
 				$cadenaSql .= $_REQUEST ['numeroDocIdentidad'] . ' ';
 				$cadenaSql .= ') ';
-				echo $cadenaSql;
 				var_dump($cadenaSql);
 				break;
 
