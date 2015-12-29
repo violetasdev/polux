@@ -514,7 +514,6 @@ class Formulario {
 		// En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
 		
 		// Paso 1: crear el listado de variables
-		
 		$valorCodificado = "action=" . $esteBloque ["nombre"]; //Ir pagina Funcionalidad
 		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );//Frontera mostrar formulario
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
