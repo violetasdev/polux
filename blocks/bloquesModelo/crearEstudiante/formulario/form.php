@@ -474,7 +474,7 @@ class Formulario {
 				// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 				
 				// -----------------CONTROL: Botón ----------------------------------------------------------------
-				$esteCampo = 'botonCancelar';
+				$esteCampo = 'botonCancelar2';
 				$atributos ["id"] = $esteCampo;
 				$atributos ["tabIndex"] = $tab;
 				$atributos ["tipo"] = 'boton';
@@ -484,7 +484,7 @@ class Formulario {
 				$atributos ["estiloBoton"] = '';
 				// verificar: true para verificar el formulario antes de pasarlo al servidor.
 				$atributos ["verificar"] = '';
-				$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la funciÃ³n submit declarada en ready.js
+				$atributos ["tipoSubmit"] = ''; // Dejar vacio para un submit normal, en este caso se ejecuta la funciÃ³n submit declarada en ready.js
 				$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
 				$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
 				$tab ++;

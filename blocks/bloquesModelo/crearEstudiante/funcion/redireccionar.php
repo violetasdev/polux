@@ -14,7 +14,7 @@ class redireccion {
 		switch ($opcion) {
 			
 			case "inserto" :
-				var_dump($opcion);
+				//var_dump ( $opcion );
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=confirma";
@@ -27,6 +27,10 @@ class redireccion {
 				$variable .= "&mensaje=error";
 				break;
 			
+			case "devolver" :
+				$variable = "pagina=" . 'bienvenida';
+				break;
+			
 			default :
 				$variable = '';
 		}
@@ -37,13 +41,12 @@ class redireccion {
 		$url = $miConfigurador->configuracion ["host"] . $miConfigurador->configuracion ["site"] . "/index.php?";
 		
 		$enlace = $miConfigurador->configuracion ['enlace'];
-		var_dump($variable);
+		//var_dump ( $variable );
 		$variable = $miConfigurador->fabricaConexiones->crypto->codificar ( $variable );
 		$_REQUEST [$enlace] = $enlace . '=' . $variable;
 		$redireccion = $url . $_REQUEST [$enlace];
 		
-		//echo "<script>location.replace('" . $redireccion . "')</script>";
-		
+		echo "<script>location.replace('" . $redireccion . "')</script>";
 		
 		return true;
 	}
