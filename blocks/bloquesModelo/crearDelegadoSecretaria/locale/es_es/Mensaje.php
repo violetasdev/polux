@@ -4,29 +4,17 @@ $this->idioma["clave"]="Clave:";
 $this->idioma["usuarioTitulo"]="Número de documento";
 $this->idioma["claveTitulo"]="Clave de Acceso";
 
-$this->idioma["programaCurricular"]="Programa Curricular:";
-$this->idioma["programaCurricularTitulo"]="Ingrese el programa curricular";
-
-
-
-
-
-$this->idioma["semestre"]="Semestre";
-$this->idioma["semestreTitulo"]="Ingrese el semestre del docente";
-
-
-$this->idioma["tematicas"]="Tematicas de Interes: Areas de conocimiento";
-$this->idioma["tematicasTitulo"]="Seleccione alguna tematica";
-
-$this->idioma["secretaria"]="Secretaria academica";
+$this->idioma["seleccionarTipoDocumento"]="Tipo de Documento:";
+$this->idioma["seleccionarTipoDocumentoTitulo"]="Seleccione el tipo de documento";
+$this->idioma["secretaria"]="Secretaría académica";
 $this->idioma["secretariaTitulo"]="Seleccione una secretaria academica";
-$this->idioma["nombreDelegado"]="Nombre del delegado:";
+$this->idioma["nombreDelegado"]="Nombre:";
 $this->idioma["nombreDelegadoTitulo"]="Ingrese el nombre del delegado";
-$this->idioma["primerApellido"]="Primer apellido del delegado:";
+$this->idioma["primerApellido"]="Primer apellido:";
 $this->idioma["primerApellidoTitulo"]="Ingrese el primer apellido del delegado";
-$this->idioma["segundoApellido"]="Segundo apellido del delegado:";
+$this->idioma["segundoApellido"]="Segundo apellido:";
 $this->idioma["segundoApellidoTitulo"]="Ingrese el segundo apellido del delegado";
-$this->idioma["numeroDocIdentidad"]="Número de Documento de Identidad del Delegado Secretaria Academica";
+$this->idioma["numeroDocIdentidad"]="Número de Documento de Identidad:";
 $this->idioma["numeroDocIdentidadTitulo"]="Ingrese el número de Documento";
 $this->idioma["codigoDelegado"]="Código del delegado:";
 $this->idioma["codigoDelegadoTitulo"]="Ingrese el cúdigo del delegado";
@@ -45,4 +33,9 @@ $this->idioma["noDefinido"]="No definido";
 $this->idioma["botonIngresar"]="Ingresar";
 $this->idioma["botonCrear"]="Crear delegado";
 
+$this->idioma["mensajeRegistro"]="Delegado creado";
+$this->idioma["mensajeError"]="Error al crear el delegado";
+$this->idioma["continuar"]="Continuar";
+
+$this->idioma["marcoDatos"]="Datos del delegado";
 ?>

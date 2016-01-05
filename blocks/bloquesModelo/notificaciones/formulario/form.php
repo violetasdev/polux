@@ -86,11 +86,10 @@ class Formulario {
 		$atributos ['marco'] = true;
 		$atributos ['columnas'] = 1;
 		$atributos ['dobleLinea'] = false;
-		$atributos ['obligatorio'] = true;
-		$atributos ['etiquetaObligatorio'] = true;
+		$atributos ['obligatorio'] = false;
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['validar'] = 'required, maxSize[15]';
+		$atributos ['validar'] = '';
 		
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -119,11 +118,10 @@ class Formulario {
 		$atributos ['marco'] = true;
 		$atributos ['columnas'] = 1;
 		$atributos ['dobleLinea'] = false;
-		$atributos ['obligatorio'] = true;
-		$atributos ['etiquetaObligatorio'] = true;
+		$atributos ['obligatorio'] = false;
 		$atributos ['tabIndex'] = $tab;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['validar'] = 'required, maxSize[15]';
+		$atributos ['validar'] = '';
 		
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];

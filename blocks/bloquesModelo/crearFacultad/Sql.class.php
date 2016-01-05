@@ -15,8 +15,6 @@ include_once ("core/connection/Sql.class.php");
  * poder realizar rollbacks gestionados por el aplicativo.
  */
 
-
-
 class Sql extends \Sql {
     
     var $miConfigurador;
@@ -39,22 +37,24 @@ class Sql extends \Sql {
              * Clausulas específicas
              */
             case 'registrar' :
-                $cadenaSql = 'INSERT INTO polux.ge_tfacu';
-                $cadenaSql .= '( ';
-                $cadenaSql .= 'facu_nom,';
-                $cadenaSql .= 'facu_dir,';
-                $cadenaSql .= 'facu_tel,';
-                $cadenaSql .= 'facu_mail,';
-                $cadenaSql .= 'facu_descri';
-                $cadenaSql .= ')';
-                $cadenaSql .= 'VALUES ';
-                $cadenaSql .= '(';
-                $cadenaSql .= '\'' . $_REQUEST ['nombreFacultad'] . '\', ';
-                $cadenaSql .= '\'' . $_REQUEST ['direccionFacultad'] . '\', ';
-                $cadenaSql .= '\'' . $_REQUEST ['telefonoFacultad'] . '\', ';
-                $cadenaSql .= '\'' . $_REQUEST ['emailFacultad'] . '\', ';
-                $cadenaSql .= '\'' . $_REQUEST ['descripcionFacultad'] . '\'';
-                $cadenaSql .= ') ';
+                $cadenaSql = "INSERT INTO trabajosdegrado.ge_tfacu";
+                $cadenaSql .= "(";
+                $cadenaSql .= "facu_nom,";
+                $cadenaSql .= "facu_dir,";
+                $cadenaSql .= "facu_tel,";
+                $cadenaSql .= "facu_mail,";
+                $cadenaSql .= "facu_descri";
+                $cadenaSql .= ") ";
+                $cadenaSql .= "VALUES ";
+                $cadenaSql .= "(";
+                $cadenaSql .= "'" . $_REQUEST ['nombreFacultad'] . "', ";
+                $cadenaSql .= "'" . $_REQUEST ['direccionFacultad'] . "', ";
+                $cadenaSql .= "'" . $_REQUEST ['telefonoFacultad'] . "', ";
+                $cadenaSql .= "'" . $_REQUEST ['emailFacultad'] . "', ";
+                $cadenaSql .= "'" . $_REQUEST ['descripcionFacultad']."'";
+                $cadenaSql .= ") ";
+                var_dump($cadenaSql);
+                
                 break;
             
             case 'actualizarRegistro' :

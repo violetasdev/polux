@@ -16,4 +16,8 @@ $this->idioma["noDefinido"]="No definido";
 $this->idioma["botonIngresar"]="Ingresar";
 $this->idioma["botonCrear"]="Crear";
 
+$this->idioma["mensajeRegistro"]="Temática creada";
+$this->idioma["mensajeError"]="Error al crear la temática";
+$this->idioma["continuar"]="Continuar";
+
 ?>

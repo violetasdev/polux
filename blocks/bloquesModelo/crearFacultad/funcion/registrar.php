@@ -1,23 +1,18 @@
 <?php
+
 namespace bloquesModelo\crearFacultad\funcion;
 
-use bloquesModelo\crearFacultad\funcion\redireccionar;
 include_once ('redireccionar.php');
-if (! isset ( $GLOBALS ["autorizado"] )) {
-	include ("../index.php");
-	exit ();
-}
+
 class Registrar {
-	
 	var $miConfigurador;
 	var $lenguaje;
 	var $miFormulario;
-	var $miFuncion;
 	var $miSql;
 	var $conexion;
+	var $miFuncion;
 	
 	function __construct($lenguaje, $sql, $funcion) {
-		
 		$this->miConfigurador = \Configurador::singleton ();
 		$this->miConfigurador->fabricaConexiones->setRecursoDB ( 'principal' );
 		$this->lenguaje = $lenguaje;
@@ -26,20 +21,18 @@ class Registrar {
 	}
 	
 	function procesarFormulario() {
+		
+		// Aquí va la lógica de procesamiento
+		
+		// Al final se ejecuta la redirección la cual pasará el control a otra página
 		$conexion = "estructura";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		
-		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
-		
-		$this->miConfigurador = \Configurador::singleton ();
-		$ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
-		$rutaURL = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" );
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'registrar', $_REQUEST );
 		$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "insertar" );
 		
 		if ($resultado) {
-			redireccion::redireccionar ( 'inserto',  'Facultad');
+			redireccion::redireccionar ( 'inserto');
 			exit ();
 		} else {
 			redireccion::redireccionar ( 'noInserto' );
@@ -56,6 +49,8 @@ class Registrar {
 		}
 	}
 }
-$miRegistrador = new Registrar ( $this->lenguaje, $this->sql, $this->funcion );
-$resultado = $miRegistrador->procesarFormulario();
-?>
+
+$miProcesador = new Registrar ( $this->lenguaje, $this->sql, $this->funcion );
+
+$resultado = $miProcesador->procesarFormulario ();
+

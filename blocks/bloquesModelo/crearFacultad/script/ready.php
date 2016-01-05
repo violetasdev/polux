@@ -1,4 +1,4 @@
-$("#contenido").validationEngine({
+$("#crearFacultad").validationEngine({
 	promptPosition : "centerRight",
 	scroll: false,
 	autoHidePrompt: true,

@@ -33,25 +33,18 @@ class Sql extends \Sql {
         switch ($tipo) {
             
             /**
-             * Clausulas especÃ­ficas
+             * Clausulas específicas
              */
-            case 'insertarRegistro' :
-                $cadenaSql = 'INSERT INTO ';
-                $cadenaSql .= $prefijo . 'pagina ';
-                $cadenaSql .= '( ';
-                $cadenaSql .= 'nombre,';
-                $cadenaSql .= 'descripcion,';
-                $cadenaSql .= 'modulo,';
-                $cadenaSql .= 'nivel,';
-                $cadenaSql .= 'parametro';
-                $cadenaSql .= ') ';
+            case 'registrar' :
+                $cadenaSql = 'INSERT INTO trabajosdegrado.ge_tacono';
+                $cadenaSql .= '(';
+                $cadenaSql .= 'acono_nom,';
+                $cadenaSql .= 'acono_descri';
+                $cadenaSql .= ')';
                 $cadenaSql .= 'VALUES ';
-                $cadenaSql .= '( ';
-                $cadenaSql .= '\'' . $_REQUEST ['nombrePagina'] . '\', ';
-                $cadenaSql .= '\'' . $_REQUEST ['descripcionPagina'] . '\', ';
-                $cadenaSql .= '\'' . $_REQUEST ['moduloPagina'] . '\', ';
-                $cadenaSql .= $_REQUEST ['nivelPagina'] . ', ';
-                $cadenaSql .= '\'' . $_REQUEST ['parametroPagina'] . '\'';
+                $cadenaSql .= '(';
+                $cadenaSql .= '\'' . $_REQUEST ['nombreTematica'] . '\', ';
+                $cadenaSql .= '\'' . $_REQUEST ['descripcion'] . '\' ';
                 $cadenaSql .= ') ';
                 break;
             

@@ -120,7 +120,7 @@ class Sql extends \Sql {
                 	$cadenaSql .= 'genero as GENERO, ';
                 	$cadenaSql .= 'fecha_registro as FECHA ';
                 	$cadenaSql .= 'FROM ';
-                	$cadenaSql .= 'polux.usuario ';
+                	$cadenaSql .= 'trabajosdegrado.usuario ';
                 	$cadenaSql .= 'WHERE ';
                 	$cadenaSql .= 'id_usuario=\'' . $_REQUEST ['user'] . '\' ';
                 	$cadenaSql .= 'and clave=\'' . $_REQUEST ['pass'] . '\' ';

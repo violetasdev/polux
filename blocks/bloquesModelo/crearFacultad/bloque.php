@@ -67,7 +67,8 @@ if (! class_exists ( '\\bloquesModelo\\crearFacultad\\Bloque' )) {
         public function bloque() {
             
             if (isset ( $_REQUEST ['botonCancelar'] ) && $_REQUEST ['botonCancelar'] == "true") {
-                $this->miFuncion->redireccionar ( "paginaPrincipal" );
+                $this->miFuncion->redireccion( "paginaPrincipal" );
+                
             } else {
                 
                 /**
